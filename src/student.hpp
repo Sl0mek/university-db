@@ -4,7 +4,8 @@
 
 enum class Gender {
     Male,
-    Female
+    Female,
+    Unknown
 };
 
 class Student {
@@ -18,7 +19,14 @@ private:
 
     std::string getGenderString() const;
 
+    std::string getFirstNameFromUser();
+    std::string getLastNameFromUser();
+    int getStudentCardNumberFromUser();
+    std::string getPeselFromUser();
+    Gender getGenderFromUser();
+
 public:
+    Student();
     Student(const std::string& firstName,
             const std::string& lastName,
             const Address& address,

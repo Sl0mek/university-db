@@ -1,6 +1,14 @@
 #include "student.hpp"
 #include <sstream>
 
+Student::Student() {
+    this->firstName_ = getFirstNameFromUser();
+    this->lastName_ = getLastNameFromUser();
+    this->studentCardNumber_ = getStudentCardNumberFromUser();
+    this->pesel_ = getPeselFromUser();
+    this->getGenderFromUser();
+}
+
 Student::Student(const std::string& firstName,
                  const std::string& lastName,
                  const Address& address,
@@ -64,11 +72,50 @@ std::string Student::getGenderString() const {
 
 std::string Student::getStudentDescription() const {
     std::stringstream ss;
+    ss << "==================================\n";
     ss << "Name: " << firstName_ << " " << lastName_ << "\n";
     ss << "Address: " << address_.getAddress() << "\n";
     ss << "Student Card Number: " << studentCardNumber_ << "\n";
     ss << "PESEL: " << pesel_ << "\n";
     ss << "Gender: " << getGenderString() << "\n";
+    ss << "==================================\n";
 
     return ss.str();
+}
+
+std::string Student::getFirstNameFromUser() {
+    std::string firstName;
+    std::cout << "Enter first name: \n> ";
+    std::cin >> firstName;
+    return firstName;
+}
+std::string Student::getLastNameFromUser() {
+    std::string lastName;
+    std::cout << "Enter last name: \n> ";
+    std::cin >> lastName;
+    return lastName;
+}
+int Student::getStudentCardNumberFromUser() {
+    int studentCardNumber;
+    std::cout << "Enter student card number: \n> ";
+    std::cin >> studentCardNumber;
+    return studentCardNumber;
+}
+std::string Student::getPeselFromUser() {
+    std::string pesel;
+    std::cout << "Enter PESEL: \n> ";
+    std::cin >> pesel;
+    return pesel;
+}
+Gender Student::getGenderFromUser() {
+    std::string gender;
+    std::cout << "Enter gender (M/F): \n> ";
+    std::cin >> gender;
+    if (gender == "M") {
+        return Gender::Male;
+    } else if (gender == "F") {
+        return Gender::Female;
+    } else {
+        return Gender::Female;
+    }
 }
