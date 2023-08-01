@@ -27,8 +27,7 @@ void Db::addStudent() {
     this->students_.push_back(tmp);
 }
 
-void Db::displayMenu()
-{
+void Db::displayMenu() {
     int choice;
     while (true) {
         std::cout << "===== Menu =====\n";
@@ -44,27 +43,27 @@ void Db::displayMenu()
         std::cin >> choice;
 
         switch (choice) {
-            case 1:
-                addStudent();
-                break;
-            case 2:
-                displayDatabase();
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 0:
-                std::cout << "Goodbye!\n";
-                return;
-            default:
-                std::cout << "Invalid choice. Please try again.\n";
+        case 1:
+            addStudent();
+            break;
+        case 2:
+            displayDatabase();
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 0:
+            std::cout << "Goodbye!\n";
+            return;
+        default:
+            std::cout << "Invalid choice. Please try again.\n";
         }
     }
 }
