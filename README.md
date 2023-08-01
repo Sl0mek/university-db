@@ -1,3 +1,4 @@
+```cpp
               _                    _ _                   _ _     
              (_)                  (_) |                 | | |    
   _   _ _ __  ___   _____ _ __ ___ _| |_ _   _ ______ __| | |__  
@@ -6,7 +7,7 @@
   \__,_|_| |_|_| \_/ \___|_|  |___/_|\__|\__, |      \__,_|_.__/ 
                                           __/ |                  
                                          |___/                   
-
+```
 ## Opis
 
 University-DB jest programem napisanym w języku C++, który służy jako akademicka baza danych studentów. Program pozwala na przechowywanie, dodawanie, wyświetlanie, wyszukiwanie, sortowanie i usuwanie rekordów studentów.
