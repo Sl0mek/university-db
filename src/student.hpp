@@ -27,6 +27,7 @@ private:
 
 public:
     Student();
+    Student(std::string student);
     Student(const std::string& firstName,
             const std::string& lastName,
             const Address& address,
@@ -49,4 +50,5 @@ public:
     void setGender(Gender gender);
 
     std::string getStudentDescription() const;
+    std::string toString();
 };

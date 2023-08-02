@@ -1,5 +1,6 @@
 #include "student.hpp"
 #include <sstream>
+#include <vector>
 
 Student::Student() {
     this->firstName_ = getFirstNameFromUser();
@@ -7,6 +8,25 @@ Student::Student() {
     this->studentCardNumber_ = getStudentCardNumberFromUser();
     this->pesel_ = getPeselFromUser();
     this->getGenderFromUser();
+}
+
+Student::Student(std::string student)
+{
+    std::vector<std::string> properties;
+    std::stringstream ss(student);
+    std::string property;
+
+    while (std::getline(ss, property, ';')) {
+        properties.push_back(property);
+    }
+
+    Address address(properties[5], 
+                    properties[6], 
+                    properties[7], 
+                    properties[8], 
+                    properties[9], 
+                    properties[10], 
+                    properties[11]);
 }
 
 Student::Student(const std::string& firstName,
@@ -118,4 +138,14 @@ Gender Student::getGenderFromUser() {
     } else {
         return Gender::Female;
     }
+}
+
+std::string Student::toString()
+{
+    return  this->firstName_  + ";" +
+            this->lastName_  + ";" +
+            std::to_string(this->studentCardNumber_) + ";" +
+            this->pesel_ + ";" +
+            getGenderString() + ";" +
+            this->address_.toString();
 }
