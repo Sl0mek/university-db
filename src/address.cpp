@@ -63,6 +63,17 @@ std::string Address::getAddress() const {
     return formattedAddress;
 }
 
+std::string Address::toString()
+{
+    return  this->street  + ";" +
+            this->houseNumber  + ";" +
+            this->city  + ";" +
+            this->postalCode  + ";" +
+            this->country  + ";" +
+            this->apartmentNumber  + ";" +
+            this->state  + ";";
+}
+
 std::string Address::getStreetFromUser() {
     std::string street;
     std::cout << "Enter street: \n> ";

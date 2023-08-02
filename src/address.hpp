@@ -21,6 +21,7 @@ public:
     std::string getCountry() const;
 
     std::string getAddress() const;
+    std::string toString();
 
 private:
     std::string street;
