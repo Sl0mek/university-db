@@ -9,8 +9,11 @@ private:
 
 public:
     Db();
+    void initDb(std::string fileName);
     void addStudent();
     void displayDatabase();
     void displayMenu();
+    Student createStudent(std::string student);
+    // std::vector<Student>::iterator searchByLastName(std::string lastName);
     ~Db();
 };

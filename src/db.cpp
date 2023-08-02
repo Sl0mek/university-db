@@ -1,5 +1,7 @@
 #include "db.hpp"
 #include <algorithm>
+#include <sstream>
+#include <fstream>
 
 Db::Db() {
     std::cout << R"(
@@ -12,14 +14,33 @@ Db::Db() {
                                           __/ |                  
                                          |___/                   
     )";
+    initDb("db.txt");
 }
+
 Db::~Db() {
 }
+
+void Db::initDb(std::string fileName)
+{
+    std::ifstream dbFile(fileName);
+
+    if (!dbFile.is_open()) {
+        std::cerr << "Could not open the file:: " << fileName << std::endl;
+        return;
+    }
+    std::string line;
+    while (std::getline(dbFile, line)) {
+        this->students_.push_back(createStudent(line));
+    }
+
+    dbFile.close();
+}
+
 void Db::displayDatabase() {
     if (this->students_.empty()) {
         std::cout << "\nDB is empty\n";
     } else {
-        std::for_each(this->students_.begin(), this->students_.end(), [](const Student& s) { std::cout << s.getStudentDescription(); });
+        std::for_each(this->students_.begin(), this->students_.end(), [](Student& s) { std::cout << s.getStudentDescription(); });
     }
 }
 void Db::addStudent() {
@@ -66,4 +87,50 @@ void Db::displayMenu() {
             std::cout << "Invalid choice. Please try again.\n";
         }
     }
+}
+
+// std::vector<Student>::iterator Db::searchByLastName(std::string lastName)
+// {
+//     std::for_each(this->students_.begin(), this->students_.end(), [&](const Student& s){
+//         if(s.getLastName() == lastName)
+//         {
+//             return &s;
+//         }
+//     })
+// }
+
+Student Db::createStudent(std::string student)
+{
+    std::vector<std::string> properties;
+    std::stringstream ss(student);
+    std::string property;
+
+    while (std::getline(ss, property, ';')) {
+        properties.push_back(property);
+    }
+
+    Gender gender = Gender::Unknown;
+
+    if (properties[4] == "M") {
+        gender = Gender::Male;
+    } else if (properties[4]  == "F") {
+        gender = Gender::Female;
+    } 
+
+    Address address(properties[5], 
+                    properties[6], 
+                    properties[7], 
+                    properties[8], 
+                    properties[9], 
+                    properties[10], 
+                    properties[11]);
+
+    
+    
+    return Student(properties[0],
+                   properties[1],
+                   address,
+                   std::stoi(properties[2]),
+                   properties[3],
+                   gender);
 }
