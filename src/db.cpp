@@ -1,7 +1,7 @@
 #include "db.hpp"
 #include <algorithm>
-#include <sstream>
 #include <fstream>
+#include <sstream>
 
 Db::Db() {
     std::cout << R"(
@@ -20,8 +20,7 @@ Db::Db() {
 Db::~Db() {
 }
 
-void Db::initDb(std::string fileName)
-{
+void Db::initDb(std::string fileName) {
     std::ifstream dbFile(fileName);
 
     if (!dbFile.is_open()) {
@@ -36,8 +35,7 @@ void Db::initDb(std::string fileName)
     dbFile.close();
 }
 
-void Db::updateDb(std::string fileName)
-{
+void Db::updateDb(std::string fileName) {
     std::fstream dbFile(fileName);
 
     if (!dbFile.is_open()) {
@@ -45,7 +43,7 @@ void Db::updateDb(std::string fileName)
         return;
     }
 
-    std::for_each(this->students_.begin(), this->students_.end(), [&](Student& s){
+    std::for_each(this->students_.begin(), this->students_.end(), [&](Student& s) {
         dbFile << s.toString() << "\n";
     });
 
@@ -110,35 +108,28 @@ void Db::displayMenu() {
     }
 }
 
-void Db::searchByLastName()
-{
+void Db::searchByLastName() {
     std::string tmp = "";
     std::cout << "Enter last name: \n> ";
     std::cin >> tmp;
     int count = searchByLastName(tmp);
-    if(count == 0)
-    {
+    if (count == 0) {
         std::cout << "No results found for " << tmp << "\n";
-    }
-    else
-    {
+    } else {
         std::cout << "Number of searches: " << count << "\n";
     }
 }
 
-int Db::searchByLastName(std::string lastName)
-{
+int Db::searchByLastName(std::string lastName) {
     int count = 0;
-    auto search = [](const std::vector<Student>& students, int& count, std::string lastName){
+    auto search = [](const std::vector<Student>& students, int& count, std::string lastName) {
         std::vector<Student>::const_iterator it = students.cbegin();
-        while(it != students.end())
-        {
-            it = std::find_if(it, students.cend(), [&](const Student& s){
+        while (it != students.end()) {
+            it = std::find_if(it, students.cend(), [&](const Student& s) {
                 return s.getLastName() == lastName;
             });
-            if(it != students.end())
-            {
-                std::cout << it->getStudentDescription(); 
+            if (it != students.end()) {
+                std::cout << it->getStudentDescription();
                 count++;
                 it++;
             }
@@ -149,35 +140,28 @@ int Db::searchByLastName(std::string lastName)
     return count;
 }
 
-void Db::searchByPESEL()
-{
+void Db::searchByPESEL() {
     std::string tmp = "";
     std::cout << "Enter PESEL: \n> ";
     std::cin >> tmp;
     int count = searchByPESEL(tmp);
-    if(count == 0)
-    {
+    if (count == 0) {
         std::cout << "No results found for " << tmp << "\n";
-    }
-    else
-    {
+    } else {
         std::cout << "Number of searches: " << count << "\n";
     }
 }
 
-int Db::searchByPESEL(std::string pesel)
-{
+int Db::searchByPESEL(std::string pesel) {
     int count = 0;
-    auto search = [](const std::vector<Student>& students, int& count, std::string pesel){
+    auto search = [](const std::vector<Student>& students, int& count, std::string pesel) {
         std::vector<Student>::const_iterator it = students.cbegin();
-        while(it != students.end())
-        {
-            it = std::find_if(it, students.cend(), [&](const Student& s){
+        while (it != students.end()) {
+            it = std::find_if(it, students.cend(), [&](const Student& s) {
                 return s.getPesel() == pesel;
             });
-            if(it != students.end())
-            {
-                std::cout << it->getStudentDescription(); 
+            if (it != students.end()) {
+                std::cout << it->getStudentDescription();
                 count++;
                 it++;
             }
@@ -188,8 +172,7 @@ int Db::searchByPESEL(std::string pesel)
     return count;
 }
 
-Student Db::createStudent(std::string student)
-{
+Student Db::createStudent(std::string student) {
     std::vector<std::string> properties;
     std::stringstream ss(student);
     std::string property;
@@ -202,20 +185,18 @@ Student Db::createStudent(std::string student)
 
     if (properties[4] == "M") {
         gender = Gender::Male;
-    } else if (properties[4]  == "F") {
+    } else if (properties[4] == "F") {
         gender = Gender::Female;
-    } 
+    }
 
-    Address address(properties[5], 
-                    properties[6], 
-                    properties[7], 
-                    properties[8], 
-                    properties[9], 
-                    properties[10], 
+    Address address(properties[5],
+                    properties[6],
+                    properties[7],
+                    properties[8],
+                    properties[9],
+                    properties[10],
                     properties[11]);
 
-    
-    
     return Student(properties[0],
                    properties[1],
                    address,
@@ -224,17 +205,15 @@ Student Db::createStudent(std::string student)
                    gender);
 }
 
-void Db::sortByPESEL()
-{
-    std::sort(students_.begin(), students_.end(), [](Student a, Student b){
+void Db::sortByPESEL() {
+    std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
         return std::stoll(a.getPesel()) < std::stoll(b.getPesel());
     });
     displayDatabase();
 }
 
-void Db::sortByLastName()
-{
-    std::sort(students_.begin(), students_.end(), [](Student a, Student b){
+void Db::sortByLastName() {
+    std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
         return a.getLastName() < b.getLastName();
     });
     displayDatabase();

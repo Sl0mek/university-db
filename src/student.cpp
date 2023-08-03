@@ -10,8 +10,7 @@ Student::Student() {
     this->getGenderFromUser();
 }
 
-Student::Student(std::string student)
-{
+Student::Student(std::string student) {
     std::vector<std::string> properties;
     std::stringstream ss(student);
     std::string property;
@@ -20,12 +19,12 @@ Student::Student(std::string student)
         properties.push_back(property);
     }
 
-    Address address(properties[5], 
-                    properties[6], 
-                    properties[7], 
-                    properties[8], 
-                    properties[9], 
-                    properties[10], 
+    Address address(properties[5],
+                    properties[6],
+                    properties[7],
+                    properties[8],
+                    properties[9],
+                    properties[10],
                     properties[11]);
 }
 
@@ -140,12 +139,11 @@ Gender Student::getGenderFromUser() {
     }
 }
 
-std::string Student::toString()
-{
-    return  this->firstName_  + ";" +
-            this->lastName_  + ";" +
-            std::to_string(this->studentCardNumber_) + ";" +
-            this->pesel_ + ";" +
-            getGenderString() + ";" +
-            this->address_.toString();
+std::string Student::toString() {
+    return this->firstName_ + ";" +
+           this->lastName_ + ";" +
+           std::to_string(this->studentCardNumber_) + ";" +
+           this->pesel_ + ";" +
+           getGenderString() + ";" +
+           this->address_.toString();
 }
