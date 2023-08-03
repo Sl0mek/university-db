@@ -87,12 +87,16 @@ void Db::displayMenu() {
             displayDatabase();
             break;
         case 3:
+            searchByLastName();
             break;
         case 4:
+            searchByPESEL();
             break;
         case 5:
+            sortByPESEL();
             break;
         case 6:
+            sortByLastName();
             break;
         case 7:
             break;
@@ -106,15 +110,83 @@ void Db::displayMenu() {
     }
 }
 
-// std::vector<Student>::iterator Db::searchByLastName(std::string lastName)
-// {
-//     std::for_each(this->students_.begin(), this->students_.end(), [&](const Student& s){
-//         if(s.getLastName() == lastName)
-//         {
-//             return &s;
-//         }
-//     })
-// }
+void Db::searchByLastName()
+{
+    std::string tmp = "";
+    std::cout << "Enter last name: \n> ";
+    std::cin >> tmp;
+    int count = searchByLastName(tmp);
+    if(count == 0)
+    {
+        std::cout << "No results found for " << tmp << "\n";
+    }
+    else
+    {
+        std::cout << "Number of searches: " << count << "\n";
+    }
+}
+
+int Db::searchByLastName(std::string lastName)
+{
+    int count = 0;
+    auto search = [](const std::vector<Student>& students, int& count, std::string lastName){
+        std::vector<Student>::const_iterator it = students.cbegin();
+        while(it != students.end())
+        {
+            it = std::find_if(it, students.cend(), [&](const Student& s){
+                return s.getLastName() == lastName;
+            });
+            if(it != students.end())
+            {
+                std::cout << it->getStudentDescription(); 
+                count++;
+                it++;
+            }
+        }
+        std::cout << std::endl;
+    };
+    search(students_, count, lastName);
+    return count;
+}
+
+void Db::searchByPESEL()
+{
+    std::string tmp = "";
+    std::cout << "Enter PESEL: \n> ";
+    std::cin >> tmp;
+    int count = searchByPESEL(tmp);
+    if(count == 0)
+    {
+        std::cout << "No results found for " << tmp << "\n";
+    }
+    else
+    {
+        std::cout << "Number of searches: " << count << "\n";
+    }
+}
+
+int Db::searchByPESEL(std::string pesel)
+{
+    int count = 0;
+    auto search = [](const std::vector<Student>& students, int& count, std::string pesel){
+        std::vector<Student>::const_iterator it = students.cbegin();
+        while(it != students.end())
+        {
+            it = std::find_if(it, students.cend(), [&](const Student& s){
+                return s.getPesel() == pesel;
+            });
+            if(it != students.end())
+            {
+                std::cout << it->getStudentDescription(); 
+                count++;
+                it++;
+            }
+        }
+        std::cout << std::endl;
+    };
+    search(students_, count, pesel);
+    return count;
+}
 
 Student Db::createStudent(std::string student)
 {
@@ -150,4 +222,20 @@ Student Db::createStudent(std::string student)
                    std::stoi(properties[2]),
                    properties[3],
                    gender);
+}
+
+void Db::sortByPESEL()
+{
+    std::sort(students_.begin(), students_.end(), [](Student a, Student b){
+        return std::stoll(a.getPesel()) < std::stoll(b.getPesel());
+    });
+    displayDatabase();
+}
+
+void Db::sortByLastName()
+{
+    std::sort(students_.begin(), students_.end(), [](Student a, Student b){
+        return a.getLastName() < b.getLastName();
+    });
+    displayDatabase();
 }

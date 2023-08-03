@@ -15,6 +15,11 @@ public:
     void displayDatabase();
     void displayMenu();
     Student createStudent(std::string student);
-    // std::vector<Student>::iterator searchByLastName(std::string lastName);
+    void searchByLastName();
+    int searchByLastName(std::string lastName);
+    void searchByPESEL();
+    int searchByPESEL(std::string pesel);
+    void sortByPESEL();
+    void sortByLastName();
     ~Db();
 };
