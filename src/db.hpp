@@ -10,6 +10,7 @@ private:
 public:
     Db();
     void initDb(std::string fileName);
+    void updateDb(std::string fileName);
     void addStudent();
     void displayDatabase();
     void displayMenu();

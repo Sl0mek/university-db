@@ -36,6 +36,22 @@ void Db::initDb(std::string fileName)
     dbFile.close();
 }
 
+void Db::updateDb(std::string fileName)
+{
+    std::fstream dbFile(fileName);
+
+    if (!dbFile.is_open()) {
+        std::cerr << "Could not open the file:: " << fileName << std::endl;
+        return;
+    }
+
+    std::for_each(this->students_.begin(), this->students_.end(), [&](Student& s){
+        dbFile << s.toString() << "\n";
+    });
+
+    dbFile.close();
+}
+
 void Db::displayDatabase() {
     if (this->students_.empty()) {
         std::cout << "\nDB is empty\n";
@@ -51,7 +67,7 @@ void Db::addStudent() {
 void Db::displayMenu() {
     int choice;
     while (true) {
-        std::cout << "===== Menu =====\n";
+        std::cout << "============== Menu ==============\n";
         std::cout << "1 - Add a student\n";
         std::cout << "2 - Display the database\n";
         std::cout << "3 - Search by last name\n";
@@ -81,6 +97,7 @@ void Db::displayMenu() {
         case 7:
             break;
         case 0:
+            updateDb("db.txt");
             std::cout << "Goodbye!\n";
             return;
         default:
