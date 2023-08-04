@@ -8,5 +8,5 @@ TEST(HelloTest, BasicAssertions) {
     Db db;
     db.addStudent(newStudent);
 
-     EXPECT_EQ(1, db.searchByPESEL("80060519944"));
+    EXPECT_EQ(1, db.searchByPESEL("80060519944"));
 }

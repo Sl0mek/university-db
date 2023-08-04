@@ -138,8 +138,7 @@ std::string Address::getStateFromUser() {
     return state;
 }
 
-bool Address::isZipCodeValid(const std::string& zipCode)
-{
+bool Address::isZipCodeValid(const std::string& zipCode) {
     std::regex zipCodeRegex(R"(\d{2}-\d{3})");
     return std::regex_match(zipCode, zipCodeRegex);
 }

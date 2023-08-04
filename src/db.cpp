@@ -62,8 +62,7 @@ void Db::addStudent() {
     addStudent(newStudent);
 }
 
-void Db::addStudent(Student newStudent)
-{
+void Db::addStudent(Student newStudent) {
     this->students_.push_back(newStudent);
 }
 
