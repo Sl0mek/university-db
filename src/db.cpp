@@ -184,9 +184,9 @@ Student Db::createStudent(std::string student) {
 
     Gender gender = Gender::Unknown;
 
-    if (properties[4] == "M") {
+    if (properties[4] == "Male") {
         gender = Gender::Male;
-    } else if (properties[4] == "F") {
+    } else if (properties[4] == "Female") {
         gender = Gender::Female;
     }
 

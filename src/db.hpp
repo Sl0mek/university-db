@@ -6,15 +6,11 @@
 class Db {
 private:
     std::vector<Student> students_;
-
-public:
-    Db();
-    ~Db();
     void initDb(std::string fileName);
     void updateDb(std::string fileName);
     void addStudent();
     void displayDatabase();
-    void displayMenu();
+
     Student createStudent(std::string student);
     void searchByLastName();
     int searchByLastName(std::string lastName);
@@ -24,4 +20,9 @@ public:
     void sortByLastName();
     void removeByIndex();
     void removeByIndex(std::string index);
+
+public:
+    Db();
+    ~Db();
+    void displayMenu();
 };
