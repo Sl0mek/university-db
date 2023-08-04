@@ -220,17 +220,15 @@ void Db::sortByLastName() {
     displayDatabase();
 }
 
-void Db::removeByIndex()
-{
+void Db::removeByIndex() {
     std::string tmp = "";
     std::cout << "Enter index: \n> ";
     std::cin >> tmp;
     removeByIndex(tmp);
 }
 
-void Db::removeByIndex(std::string index)
-{
-    auto it = std::remove_if(students_.begin(), students_.end(), [&](const Student& s){
+void Db::removeByIndex(std::string index) {
+    auto it = std::remove_if(students_.begin(), students_.end(), [&](const Student& s) {
         return s.getStudentCardNumber() == index;
     });
     students_.erase(it, students_.end());

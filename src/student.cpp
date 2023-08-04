@@ -125,8 +125,7 @@ std::string Student::getPeselFromUser() {
     std::cout << "Enter PESEL: \n> ";
     std::cin >> pesel;
     bool isValid = isPeselValid(pesel);
-    while(!isValid)
-    {
+    while (!isValid) {
         std::cout << "Incorrect PESEL number!: " << pesel << "\n";
         std::cout << "Enter PESEL: \n> ";
         std::cin >> pesel;
@@ -136,8 +135,7 @@ std::string Student::getPeselFromUser() {
     return pesel;
 }
 
-bool Student::isPeselValid(const std::string& pesel)
-{
+bool Student::isPeselValid(const std::string& pesel) {
     if (pesel.length() != 11) {
         return false;
     }
