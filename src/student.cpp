@@ -31,7 +31,7 @@ Student::Student(std::string student) {
 Student::Student(const std::string& firstName,
                  const std::string& lastName,
                  const Address& address,
-                 int studentCardNumber,
+                 std::string studentCardNumber,
                  const std::string& pesel,
                  Gender gender)
     : firstName_(firstName),
@@ -50,7 +50,7 @@ std::string Student::getLastName() const {
 Address Student::getAddress() const {
     return address_;
 }
-int Student::getStudentCardNumber() const {
+std::string Student::getStudentCardNumber() const {
     return studentCardNumber_;
 }
 std::string Student::getPesel() const {
@@ -69,7 +69,7 @@ void Student::setLastName(const std::string& lastName) {
 void Student::setAddress(const Address& address) {
     address_ = address;
 }
-void Student::setStudentCardNumber(int studentCardNumber) {
+void Student::setStudentCardNumber(std::string studentCardNumber) {
     studentCardNumber_ = studentCardNumber;
 }
 void Student::setPesel(const std::string& pesel) {
@@ -114,8 +114,8 @@ std::string Student::getLastNameFromUser() {
     std::cin >> lastName;
     return lastName;
 }
-int Student::getStudentCardNumberFromUser() {
-    int studentCardNumber;
+std::string Student::getStudentCardNumberFromUser() {
+    std::string studentCardNumber;
     std::cout << "Enter student card number: \n> ";
     std::cin >> studentCardNumber;
     return studentCardNumber;
@@ -142,7 +142,7 @@ Gender Student::getGenderFromUser() {
 std::string Student::toString() {
     return this->firstName_ + ";" +
            this->lastName_ + ";" +
-           std::to_string(this->studentCardNumber_) + ";" +
+           this->studentCardNumber_ + ";" +
            this->pesel_ + ";" +
            getGenderString() + ";" +
            this->address_.toString();
