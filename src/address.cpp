@@ -29,21 +29,27 @@ Address::Address(const std::string& street,
 std::string Address::getStreet() const {
     return street;
 }
+
 std::string Address::getHouseNumber() const {
     return houseNumber;
 }
+
 std::string Address::getApartmentNumber() const {
     return apartmentNumber;
 }
+
 std::string Address::getCity() const {
     return city;
 }
+
 std::string Address::getZipCode() const {
     return zipCode;
 }
+
 std::string Address::getState() const {
     return state;
 }
+
 std::string Address::getCountry() const {
     return country;
 }
@@ -80,18 +86,21 @@ std::string Address::getStreetFromUser() {
     std::cin >> street;
     return street;
 }
+
 std::string Address::getHouseNumberFromUser() {
     std::string houseNumber;
     std::cout << "Enter house number: \n> ";
     std::cin >> houseNumber;
     return houseNumber;
 }
+
 std::string Address::getCityFromUser() {
     std::string city;
     std::cout << "Enter city number: \n> ";
     std::cin >> city;
     return city;
 }
+
 std::string Address::getZipCodeFromUser() {
     std::string zipCode;
     std::cout << "Enter zip code: \n> ";
@@ -107,18 +116,21 @@ std::string Address::getZipCodeFromUser() {
 
     return zipCode;
 }
+
 std::string Address::getCountryFromUser() {
     std::string country;
     std::cout << "Enter country: \n> ";
     std::cin >> country;
     return country;
 }
+
 std::string Address::getApartmentNumberFromUser() {
     std::string apartmentNumber;
     std::cout << "Enter apartment number: \n> ";
     std::cin >> apartmentNumber;
     return apartmentNumber;
 }
+
 std::string Address::getStateFromUser() {
     std::string state;
     std::cout << "Enter state: \n> ";
@@ -126,7 +138,8 @@ std::string Address::getStateFromUser() {
     return state;
 }
 
-bool Address::isZipCodeValid(const std::string& zipCode) {
+bool Address::isZipCodeValid(const std::string& zipCode)
+{
     std::regex zipCodeRegex(R"(\d{2}-\d{3})");
     return std::regex_match(zipCode, zipCodeRegex);
 }
