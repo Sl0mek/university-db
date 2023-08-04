@@ -124,8 +124,39 @@ std::string Student::getPeselFromUser() {
     std::string pesel;
     std::cout << "Enter PESEL: \n> ";
     std::cin >> pesel;
+    bool isValid = isPeselValid(pesel);
+    while(!isValid)
+    {
+        std::cout << "Incorrect PESEL number!: " << pesel << "\n";
+        std::cout << "Enter PESEL: \n> ";
+        std::cin >> pesel;
+        isValid = isPeselValid(pesel);
+    }
+
     return pesel;
 }
+
+bool Student::isPeselValid(const std::string& pesel)
+{
+    if (pesel.length() != 11) {
+        return false;
+    }
+
+    int weights[] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
+    int checksum = 0;
+
+    for (int i = 0; i < 11; i++) {
+        if (!isdigit(pesel[i])) {
+            return false;
+        }
+
+        int digit = pesel[i] - '0';
+        checksum += digit * weights[i];
+    }
+
+    return (checksum % 10 == 0);
+}
+
 Gender Student::getGenderFromUser() {
     std::string gender;
     std::cout << "Enter gender (M/F): \n> ";

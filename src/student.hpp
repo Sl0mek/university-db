@@ -23,6 +23,7 @@ private:
     std::string getLastNameFromUser();
     std::string getStudentCardNumberFromUser();
     std::string getPeselFromUser();
+    bool isPeselValid(const std::string& pesel);
     Gender getGenderFromUser();
 
 public:
