@@ -58,8 +58,13 @@ void Db::displayDatabase() {
     }
 }
 void Db::addStudent() {
-    auto tmp = Student();
-    this->students_.push_back(tmp);
+    auto newStudent = Student();
+    addStudent(newStudent);
+}
+
+void Db::addStudent(Student newStudent)
+{
+    this->students_.push_back(newStudent);
 }
 
 void Db::displayMenu() {
