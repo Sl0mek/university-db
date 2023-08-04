@@ -36,12 +36,15 @@ void Db::initDb(std::string fileName) {
 }
 
 void Db::updateDb(std::string fileName) {
-    std::fstream dbFile(fileName);
+    std::ofstream  dbFile(fileName);
 
     if (!dbFile.is_open()) {
         std::cerr << "Could not open the file:: " << fileName << std::endl;
         return;
     }
+
+    dbFile.close();
+    dbFile.open(fileName, std::ios::out | std::ios::app);
 
     std::for_each(this->students_.begin(), this->students_.end(), [&](Student& s) {
         dbFile << s.toString() << "\n";
@@ -97,6 +100,7 @@ void Db::displayMenu() {
             sortByLastName();
             break;
         case 7:
+            removeByIndex();
             break;
         case 0:
             updateDb("db.txt");
@@ -200,7 +204,7 @@ Student Db::createStudent(std::string student) {
     return Student(properties[0],
                    properties[1],
                    address,
-                   std::stoi(properties[2]),
+                   properties[2],
                    properties[3],
                    gender);
 }
@@ -217,4 +221,20 @@ void Db::sortByLastName() {
         return a.getLastName() < b.getLastName();
     });
     displayDatabase();
+}
+
+void Db::removeByIndex()
+{
+    std::string tmp = "";
+    std::cout << "Enter index: \n> ";
+    std::cin >> tmp;
+    removeByIndex(tmp);
+}
+
+void Db::removeByIndex(std::string index)
+{
+    auto it = std::remove_if(students_.begin(), students_.end(), [&](const Student& s){
+        return s.getStudentCardNumber() == index;
+    });
+    students_.erase(it, students_.end());
 }

@@ -9,6 +9,7 @@ private:
 
 public:
     Db();
+    ~Db();
     void initDb(std::string fileName);
     void updateDb(std::string fileName);
     void addStudent();
@@ -21,5 +22,6 @@ public:
     int searchByPESEL(std::string pesel);
     void sortByPESEL();
     void sortByLastName();
-    ~Db();
+    void removeByIndex();
+    void removeByIndex(std::string index);
 };
