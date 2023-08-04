@@ -36,15 +36,12 @@ void Db::initDb(std::string fileName) {
 }
 
 void Db::updateDb(std::string fileName) {
-    std::ofstream  dbFile(fileName);
+    std::ofstream dbFile(fileName, std::ios::out | std::ios::trunc);
 
     if (!dbFile.is_open()) {
         std::cerr << "Could not open the file:: " << fileName << std::endl;
         return;
     }
-
-    dbFile.close();
-    dbFile.open(fileName, std::ios::out | std::ios::app);
 
     std::for_each(this->students_.begin(), this->students_.end(), [&](Student& s) {
         dbFile << s.toString() << "\n";
