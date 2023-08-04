@@ -44,18 +44,23 @@ Student::Student(const std::string& firstName,
 std::string Student::getFirstName() const {
     return firstName_;
 }
+
 std::string Student::getLastName() const {
     return lastName_;
 }
+
 Address Student::getAddress() const {
     return address_;
 }
+
 std::string Student::getStudentCardNumber() const {
     return studentCardNumber_;
 }
+
 std::string Student::getPesel() const {
     return pesel_;
 }
+
 Gender Student::getGender() const {
     return gender_;
 }
@@ -63,18 +68,23 @@ Gender Student::getGender() const {
 void Student::setFirstName(const std::string& firstName) {
     firstName_ = firstName;
 }
+
 void Student::setLastName(const std::string& lastName) {
     lastName_ = lastName;
 }
+
 void Student::setAddress(const Address& address) {
     address_ = address;
 }
+
 void Student::setStudentCardNumber(std::string studentCardNumber) {
     studentCardNumber_ = studentCardNumber;
 }
+
 void Student::setPesel(const std::string& pesel) {
     pesel_ = pesel;
 }
+
 void Student::setGender(Gender gender) {
     gender_ = gender;
 }
@@ -108,18 +118,21 @@ std::string Student::getFirstNameFromUser() {
     std::cin >> firstName;
     return firstName;
 }
+
 std::string Student::getLastNameFromUser() {
     std::string lastName;
     std::cout << "Enter last name: \n> ";
     std::cin >> lastName;
     return lastName;
 }
+
 std::string Student::getStudentCardNumberFromUser() {
     std::string studentCardNumber;
     std::cout << "Enter student card number: \n> ";
     std::cin >> studentCardNumber;
     return studentCardNumber;
 }
+
 std::string Student::getPeselFromUser() {
     std::string pesel;
     std::cout << "Enter PESEL: \n> ";
@@ -155,16 +168,33 @@ bool Student::isPeselValid(const std::string& pesel) {
     return (checksum % 10 == 0);
 }
 
+bool Student::isGenderValid(const std::string& gender) {
+    if (gender == "M" || gender == "F" || gender == "m" || gender == "f") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 Gender Student::getGenderFromUser() {
     std::string gender;
     std::cout << "Enter gender (M/F): \n> ";
     std::cin >> gender;
-    if (gender == "M") {
+
+    bool isValid = isGenderValid(gender);
+    while (!isValid) {
+        std::cout << "Incorrect gender!: " << gender << "\n";
+        std::cout << "Enter gender (M/F): \n> ";
+        std::cin >> gender;
+        isValid = isGenderValid(gender);
+    }
+
+    if (gender == "M" || gender == "m") {
         return Gender::Male;
-    } else if (gender == "F") {
+    } else if (gender == "F" || gender == "f") {
         return Gender::Female;
     } else {
-        return Gender::Female;
+        return Gender::Unknown;
     }
 }
 

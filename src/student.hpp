@@ -24,6 +24,7 @@ private:
     std::string getStudentCardNumberFromUser();
     std::string getPeselFromUser();
     bool isPeselValid(const std::string& pesel);
+    bool isGenderValid(const std::string& gender);
     Gender getGenderFromUser();
 
 public:
