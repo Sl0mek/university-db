@@ -1,1 +1,0 @@
-Jan;Kowalski;12345;98765432123;M;Swierkowa;123;Warszawa;33-333;Poland;321;Mazowieckie;
