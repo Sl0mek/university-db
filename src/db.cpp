@@ -17,6 +17,10 @@ Db::Db() {
     initDb("db.txt");
 }
 
+Db::Db(std::string fileName) {
+    initDb(fileName);
+}
+
 Db::~Db() {
 }
 
@@ -59,11 +63,17 @@ void Db::displayDatabase() {
 }
 void Db::addStudent() {
     auto newStudent = Student();
+    newStudent.initDataFromUser();
     addStudent(newStudent);
 }
 
 void Db::addStudent(Student newStudent) {
     this->students_.push_back(newStudent);
+}
+
+std::vector<Student> Db::getStudents()
+{
+    return students_;
 }
 
 void Db::displayMenu() {
@@ -236,4 +246,9 @@ void Db::removeByIndex(std::string index) {
         return s.getStudentCardNumber() == index;
     });
     students_.erase(it, students_.end());
+}
+
+int Db::getNumberOfStudents()
+{
+    return students_.size();
 }

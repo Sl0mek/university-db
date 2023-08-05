@@ -9,12 +9,14 @@ private:
 
 public:
     Db();
+    Db(std::string fileName);
     ~Db();
     void displayMenu();
     void initDb(std::string fileName);
     void updateDb(std::string fileName);
     void addStudent();
     void addStudent(Student newStudent);
+    std::vector<Student> getStudents();
     void displayDatabase();
 
     Student createStudent(std::string student);
@@ -26,4 +28,5 @@ public:
     void sortByLastName();
     void removeByIndex();
     void removeByIndex(std::string index);
+    int getNumberOfStudents();
 };
