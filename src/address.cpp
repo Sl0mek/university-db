@@ -56,7 +56,7 @@ std::string Address::getAddress() const {
     }
     formattedAddress += zipCode_ + " " + city_ + "\n";
     if (!state_.empty()) {
-        formattedAddress += state_+ "\n";
+        formattedAddress += state_ + "\n";
     }
     formattedAddress += country_;
 
@@ -136,8 +136,7 @@ bool Address::isZipCodeValid(const std::string& zipCode) {
     return std::regex_match(zipCode, zipCodeRegex);
 }
 
-void Address::initDataFromUser()
-{
+void Address::initDataFromUser() {
     this->street_ = getStreetFromUser();
     this->houseNumber_ = getHouseNumberFromUser();
     this->city_ = getCityFromUser();

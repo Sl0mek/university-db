@@ -207,8 +207,7 @@ Gender Student::getGenderFromUser() {
     }
 }
 
-void Student::initDataFromUser()
-{
+void Student::initDataFromUser() {
     this->firstName_ = getFirstNameFromUser();
     this->lastName_ = getLastNameFromUser();
     this->studentCardNumber_ = getStudentCardNumberFromUser();

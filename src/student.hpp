@@ -17,7 +17,6 @@ private:
     std::string pesel_;
     Gender gender_;
 
-    
     std::string getFirstNameFromUser();
     std::string getLastNameFromUser();
     std::string getStudentCardNumberFromUser();

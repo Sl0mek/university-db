@@ -71,8 +71,7 @@ void Db::addStudent(Student newStudent) {
     this->students_.push_back(newStudent);
 }
 
-std::vector<Student> Db::getStudents()
-{
+std::vector<Student> Db::getStudents() {
     return students_;
 }
 
@@ -248,7 +247,6 @@ void Db::removeByIndex(std::string index) {
     students_.erase(it, students_.end());
 }
 
-int Db::getNumberOfStudents()
-{
+int Db::getNumberOfStudents() {
     return students_.size();
 }
