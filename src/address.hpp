@@ -2,6 +2,23 @@
 #include <string>
 
 class Address {
+private:
+    std::string street_;
+    std::string houseNumber_;
+    std::string apartmentNumber_;
+    std::string city_;
+    std::string zipCode_;
+    std::string state_;
+    std::string country_;
+
+    std::string getStreetFromUser();
+    std::string getHouseNumberFromUser();
+    std::string getCityFromUser();
+    std::string getZipCodeFromUser();
+    std::string getCountryFromUser();
+    std::string getApartmentNumberFromUser();
+    std::string getStateFromUser();
+
 public:
     Address();
     Address(const std::string& street,
@@ -23,22 +40,6 @@ public:
     std::string getAddress() const;
     std::string toString();
 
-private:
-    std::string street;
-    std::string houseNumber;
-    std::string apartmentNumber;
-    std::string city;
-    std::string zipCode;
-    std::string state;
-    std::string country;
-
-    std::string getStreetFromUser();
-    std::string getHouseNumberFromUser();
-    std::string getCityFromUser();
-    std::string getZipCodeFromUser();
-    std::string getCountryFromUser();
-    std::string getApartmentNumberFromUser();
-    std::string getStateFromUser();
-
     bool isZipCodeValid(const std::string& zipCode);
+    void initDataFromUser();
 };

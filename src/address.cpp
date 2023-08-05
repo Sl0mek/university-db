@@ -2,13 +2,6 @@
 #include <regex>
 
 Address::Address() {
-    this->street = getStreetFromUser();
-    this->houseNumber = getHouseNumberFromUser();
-    this->city = getCityFromUser();
-    this->zipCode = getZipCodeFromUser();
-    this->country = getCountryFromUser();
-    this->apartmentNumber = getApartmentNumberFromUser();
-    this->state = getStateFromUser();
 }
 
 Address::Address(const std::string& street,
@@ -18,66 +11,66 @@ Address::Address(const std::string& street,
                  const std::string& country,
                  const std::string& apartmentNumber,
                  const std::string& state)
-    : street(street),
-      houseNumber(houseNumber),
-      apartmentNumber(apartmentNumber),
-      city(city),
-      zipCode(zipCode),
-      state(state),
-      country(country) {}
+    : street_(street),
+      houseNumber_(houseNumber),
+      apartmentNumber_(apartmentNumber),
+      city_(city),
+      zipCode_(zipCode),
+      state_(state),
+      country_(country) {}
 
 std::string Address::getStreet() const {
-    return street;
+    return street_;
 }
 
 std::string Address::getHouseNumber() const {
-    return houseNumber;
+    return houseNumber_;
 }
 
 std::string Address::getApartmentNumber() const {
-    return apartmentNumber;
+    return apartmentNumber_;
 }
 
 std::string Address::getCity() const {
-    return city;
+    return city_;
 }
 
 std::string Address::getZipCode() const {
-    return zipCode;
+    return zipCode_;
 }
 
 std::string Address::getState() const {
-    return state;
+    return state_;
 }
 
 std::string Address::getCountry() const {
-    return country;
+    return country_;
 }
 
 std::string Address::getAddress() const {
     std::string formattedAddress;
 
-    formattedAddress += street + " " + houseNumber + "\n";
-    if (!apartmentNumber.empty()) {
-        formattedAddress += "Apartment " + apartmentNumber + "\n";
+    formattedAddress += street_ + " " + houseNumber_ + "\n";
+    if (!apartmentNumber_.empty()) {
+        formattedAddress += "Apartment " + apartmentNumber_ + "\n";
     }
-    formattedAddress += zipCode + " " + city + "\n";
-    if (!state.empty()) {
-        formattedAddress += state + "\n";
+    formattedAddress += zipCode_ + " " + city_ + "\n";
+    if (!state_.empty()) {
+        formattedAddress += state_+ "\n";
     }
-    formattedAddress += country;
+    formattedAddress += country_;
 
     return formattedAddress;
 }
 
 std::string Address::toString() {
-    return this->street + ";" +
-           this->houseNumber + ";" +
-           this->city + ";" +
-           this->zipCode + ";" +
-           this->country + ";" +
-           this->apartmentNumber + ";" +
-           this->state + ";";
+    return this->street_ + ";" +
+           this->houseNumber_ + ";" +
+           this->city_ + ";" +
+           this->zipCode_ + ";" +
+           this->country_ + ";" +
+           this->apartmentNumber_ + ";" +
+           this->state_ + ";";
 }
 
 std::string Address::getStreetFromUser() {
@@ -96,7 +89,7 @@ std::string Address::getHouseNumberFromUser() {
 
 std::string Address::getCityFromUser() {
     std::string city;
-    std::cout << "Enter city number: \n> ";
+    std::cout << "Enter city: \n> ";
     std::cin >> city;
     return city;
 }
@@ -141,4 +134,15 @@ std::string Address::getStateFromUser() {
 bool Address::isZipCodeValid(const std::string& zipCode) {
     std::regex zipCodeRegex(R"(\d{2}-\d{3})");
     return std::regex_match(zipCode, zipCodeRegex);
+}
+
+void Address::initDataFromUser()
+{
+    this->street_ = getStreetFromUser();
+    this->houseNumber_ = getHouseNumberFromUser();
+    this->city_ = getCityFromUser();
+    this->zipCode_ = getZipCodeFromUser();
+    this->country_ = getCountryFromUser();
+    this->apartmentNumber_ = getApartmentNumberFromUser();
+    this->state_ = getStateFromUser();
 }
