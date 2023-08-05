@@ -8,38 +8,33 @@
                                           __/ |                  
                                          |___/                   
 ```
-## Opis
+## Description
 
-University-DB jest programem napisanym w języku C++, który służy jako akademicka baza danych studentów. Program pozwala na przechowywanie, dodawanie, wyświetlanie, wyszukiwanie, sortowanie i usuwanie rekordów studentów.
+University-DB is a program written in C++ that serves as an academic student database. The program allows for storing, adding, displaying, searching, sorting, and deleting student records.
 
-## Wymagania
+## Requirements
 
-Program spełnia następujące wymagania:
+The program meets the following requirements:
 
-- Przechowywanie rekordów studentów o strukturze: Imię, nazwisko, adres, nr indeksu, PESEL, płeć
-- Dodawanie nowych studentów
-- Wyświetlanie całej bazy danych
-- Wyszukiwanie po nazwisku
-- Wyszukiwanie po numerze PESEL
-- Sortowanie po numerze PESEL
-- Sortowanie po nazwisku
-- Usuwanie po numerze indeksu
+- Storing student records with the following structure: Name, surname, address, index number, PESEL number, gender
+- Adding new students
+- Display of the entire database
+- Search by last name
+- Search by PESEL number
+- Sorting by PESEL number
+- Sort by last name
+- Delete by index number
+- Validation if the PESEL number is correct, according to [Wikipedia](https://pl.wikipedia.org/wiki/PESEL#Cyfra_control) - correctness of PESEL
+- Loading from a file and saving the entire database to a file
 
-## Opcjonalne wymagania
+## Instructions
 
-Dodatkowo, program może zawierać opcjonalne funkcje:
+To compile and run a program using CMake, follow these steps:
 
-- Walidacja czy numer PESEL jest poprawny, zgodnie z [Wikipedia](https://pl.wikipedia.org/wiki/PESEL#Cyfra_kontrolna) - poprawność PESEL
-- Wczytywanie z pliku i zapisywanie całej bazy w pliku
-
-## Instrukcje
-
-Aby skompilować i uruchomić program za pomocą CMake, wykonaj następujące kroki:
-
-1. Upewnij się, że masz zainstalowany CMake oraz kompilator C++ zgodny z standardem C++11 lub nowszym.
-2. Sklonuj repozytorium University-DB na swój lokalny komputer.
-3. Przejdź do katalogu projektu.
-4. Wykonaj poniższe komendy:
+1. Make sure you have CMake installed and a C++ compiler compliant with C++11 or later.
+2. Clone the University-DB repository to your local computer.
+3. Go to the project directory.
+4. Execute the following commands:
 
 ```bash
 mkdir build
@@ -48,37 +43,42 @@ cmake ..
 make
 ```
 
-Po poprawnym skompilowaniu, uruchom program.
+After successfully compiling, run the program.
 
 ```bash
 ./university-db
 ```
 
+Launching the tests
+
+```bash
+./university-db-ut
+```
 ## Przykłady użycia
 
 ```cpp
-// Dodanie nowego studenta
-addStudent("Jan", "Kowalski", "ul. Akademicka 5", "123456", "88010101234", "M");
+// Add a new student
+addStudent(newStudent);
 
-// Wyświetlenie całej bazy danych
+// Display entire database
 displayDatabase();
 
-// Wyszukiwanie po nazwisku
+// Search by last name
 searchByLastName("Kowalski");
 
-// Wyszukiwanie po numerze PESEL
+// Search by PESEL number
 searchByPESEL("88010101234");
 
-// Sortowanie po numerze PESEL
+// Sorting by PESEL number
 sortByPESEL();
 
-// Sortowanie po nazwisku
+// Sort by last name
 sortByLastName();
 
-// Usuwanie po numerze indeksu
-removeByIndex("123456");
+// Delete by index number
+removeByIndex("12345");
 ```
 
-## Autorzy
+## Authors
 
 - Andrzej Słomka
