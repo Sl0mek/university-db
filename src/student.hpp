@@ -17,14 +17,11 @@ private:
     std::string pesel_;
     Gender gender_;
 
-    std::string getGenderString() const;
-
+    
     std::string getFirstNameFromUser();
     std::string getLastNameFromUser();
     std::string getStudentCardNumberFromUser();
     std::string getPeselFromUser();
-    bool isPeselValid(const std::string& pesel);
-    bool isGenderValid(const std::string& gender);
     Gender getGenderFromUser();
 
 public:
@@ -43,6 +40,9 @@ public:
     std::string getStudentCardNumber() const;
     std::string getPesel() const;
     Gender getGender() const;
+    std::string getGenderString() const;
+    bool isPeselValid(const std::string& pesel);
+    bool isGenderValid(const std::string& gender);
 
     void setFirstName(const std::string& firstName);
     void setLastName(const std::string& lastName);
@@ -53,4 +53,5 @@ public:
 
     std::string getStudentDescription() const;
     std::string toString();
+    void initDataFromUser();
 };

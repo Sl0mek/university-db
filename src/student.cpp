@@ -3,11 +3,6 @@
 #include <vector>
 
 Student::Student() {
-    this->firstName_ = getFirstNameFromUser();
-    this->lastName_ = getLastNameFromUser();
-    this->studentCardNumber_ = getStudentCardNumberFromUser();
-    this->pesel_ = getPeselFromUser();
-    this->getGenderFromUser();
 }
 
 Student::Student(std::string student) {
@@ -19,6 +14,14 @@ Student::Student(std::string student) {
         properties.push_back(property);
     }
 
+    Gender gender = Gender::Unknown;
+
+    if (properties[4] == "Male") {
+        gender = Gender::Male;
+    } else if (properties[4] == "Female") {
+        gender = Gender::Female;
+    }
+
     Address address(properties[5],
                     properties[6],
                     properties[7],
@@ -26,6 +29,12 @@ Student::Student(std::string student) {
                     properties[9],
                     properties[10],
                     properties[11]);
+    this->firstName_ = properties[0];
+    this->lastName_ = properties[1];
+    this->address_ = address;
+    this->studentCardNumber_ = properties[2];
+    this->pesel_ = properties[3];
+    this->gender_ = gender;
 }
 
 Student::Student(const std::string& firstName,
@@ -196,6 +205,16 @@ Gender Student::getGenderFromUser() {
     } else {
         return Gender::Unknown;
     }
+}
+
+void Student::initDataFromUser()
+{
+    this->firstName_ = getFirstNameFromUser();
+    this->lastName_ = getLastNameFromUser();
+    this->studentCardNumber_ = getStudentCardNumberFromUser();
+    this->pesel_ = getPeselFromUser();
+    this->gender_ = getGenderFromUser();
+    this->address_.initDataFromUser();
 }
 
 std::string Student::toString() {
