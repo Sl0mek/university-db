@@ -1,27 +1,15 @@
+#ifndef STUDENT_HPP
+#define STUDENT_HPP
+
 #include <iostream>
 #include <string>
 #include "address.hpp"
+#include "person.hpp"
 
-enum class Gender {
-    Male,
-    Female,
-    Unknown
-};
-
-class Student {
+class Student : public Person{
 private:
-    std::string firstName_;
-    std::string lastName_;
-    Address address_;
     std::string studentCardNumber_;
-    std::string pesel_;
-    Gender gender_;
-
-    std::string getFirstNameFromUser();
-    std::string getLastNameFromUser();
     std::string getStudentCardNumberFromUser();
-    std::string getPeselFromUser();
-    Gender getGenderFromUser();
 
 public:
     Student();
@@ -32,25 +20,15 @@ public:
             std::string studentCardNumber,
             const std::string& pesel,
             Gender gender);
+    ~Student() override;
 
-    std::string getFirstName() const;
-    std::string getLastName() const;
-    Address getAddress() const;
     std::string getStudentCardNumber() const;
-    std::string getPesel() const;
-    Gender getGender() const;
-    std::string getGenderString() const;
-    bool isPeselValid(const std::string& pesel);
-    bool isGenderValid(const std::string& gender);
 
-    void setFirstName(const std::string& firstName);
-    void setLastName(const std::string& lastName);
-    void setAddress(const Address& address);
     void setStudentCardNumber(std::string studentCardNumber);
-    void setPesel(const std::string& pesel);
-    void setGender(Gender gender);
 
-    std::string getStudentDescription() const;
-    std::string toString();
-    void initDataFromUser();
+    std::string getStudentDescription() const override;
+    std::string toString() override;
+    void initDataFromUser() override;
 };
+
+#endif // STUDENT_HPP
