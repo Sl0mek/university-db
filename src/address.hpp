@@ -1,3 +1,6 @@
+#ifndef ADDRESS_HPP
+#define ADDRESS_HPP
+
 #include <iostream>
 #include <string>
 
@@ -43,3 +46,5 @@ public:
     bool isZipCodeValid(const std::string& zipCode);
     void initDataFromUser();
 };
+
+#endif // ADDRESS_HPP
