@@ -17,6 +17,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 set(SRC_LIST
+    src/person.cpp
     src/address.cpp
     src/student.cpp
     src/db.cpp)
