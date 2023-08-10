@@ -1,3 +1,6 @@
+#ifndef DB_HPP
+#define DB_HPP
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -30,3 +33,5 @@ public:
     void removeByIndex(std::string index);
     int getNumberOfStudents();
 };
+
+#endif // DB_HPP
