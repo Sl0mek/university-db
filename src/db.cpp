@@ -233,9 +233,8 @@ void Db::sortByLastName() {
     displayDatabase();
 }
 
-void Db::sortBySalary()
-{
-    //TBD!!!
+void Db::sortBySalary() {
+    // TBD!!!
 
     std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
         return a.getSalary() < b.getSalary();

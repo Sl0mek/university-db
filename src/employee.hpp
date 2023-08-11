@@ -6,7 +6,7 @@
 #include "address.hpp"
 #include "person.hpp"
 
-class Employee : public Person{
+class Employee : public Person {
 private:
     double salary_;
     double getSalaryFromUser();
@@ -15,11 +15,11 @@ public:
     Employee();
     Employee(std::string student);
     Employee(const std::string& firstName,
-            const std::string& lastName,
-            const Address& address,
-            const std::string& pesel,
-            Gender gender,
-            double salary);
+             const std::string& lastName,
+             const Address& address,
+             const std::string& pesel,
+             Gender gender,
+             double salary);
     ~Employee() override;
 
     std::string getDescription() const override;
@@ -29,4 +29,4 @@ public:
     bool setSalary(double salary) override;
 };
 
-#endif // EMPLOYEE_HPP
+#endif  // EMPLOYEE_HPP

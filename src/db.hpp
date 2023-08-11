@@ -35,4 +35,4 @@ public:
     int getNumberOfStudents();
 };
 
-#endif // DB_HPP
+#endif  // DB_HPP

@@ -11,8 +11,7 @@ enum class Gender {
     Unknown
 };
 
-class Person
-{
+class Person {
 protected:
     std::string firstName_;
     std::string lastName_;
@@ -29,10 +28,10 @@ protected:
 public:
     Person();
     Person(const std::string& firstName,
-            const std::string& lastName,
-            const Address& address,
-            const std::string& pesel,
-            Gender gender);
+           const std::string& lastName,
+           const Address& address,
+           const std::string& pesel,
+           Gender gender);
     virtual ~Person();
 
     std::string getFirstName() const;
@@ -57,6 +56,4 @@ public:
     virtual bool setSalary(double salary) = 0;
 };
 
-#endif // PERSON_HPP
-
-
+#endif  // PERSON_HPP

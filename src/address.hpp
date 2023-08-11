@@ -47,4 +47,4 @@ public:
     void initDataFromUser();
 };
 
-#endif // ADDRESS_HPP
+#endif  // ADDRESS_HPP

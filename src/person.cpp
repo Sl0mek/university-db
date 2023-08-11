@@ -6,18 +6,17 @@ Person::Person() {
 }
 
 Person::Person(const std::string& firstName,
-                 const std::string& lastName,
-                 const Address& address,
-                 const std::string& pesel,
-                 Gender gender)
+               const std::string& lastName,
+               const Address& address,
+               const std::string& pesel,
+               Gender gender)
     : firstName_(firstName),
       lastName_(lastName),
       address_(address),
       pesel_(pesel),
       gender_(gender) {}
 
-Person::~Person()
-{
+Person::~Person() {
 }
 
 std::string Person::getFirstName() const {
@@ -175,4 +174,3 @@ void Person::initDataFromUser() {
     this->gender_ = getGenderFromUser();
     this->address_.initDataFromUser();
 }
-

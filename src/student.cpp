@@ -46,9 +46,7 @@ Student::Student(const std::string& firstName,
     : Person(firstName, lastName, address, pesel, gender),
       studentCardNumber_(studentCardNumber) {}
 
-Student::~Student()
-{
-
+Student::~Student() {
 }
 
 std::string Student::getStudentCardNumber() const {

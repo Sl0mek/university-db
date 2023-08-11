@@ -38,17 +38,15 @@ Employee::Employee(std::string employee) {
 }
 
 Employee::Employee(const std::string& firstName,
-                 const std::string& lastName,
-                 const Address& address,
-                 const std::string& pesel,
-                 Gender gender,
-                 double salary)
+                   const std::string& lastName,
+                   const Address& address,
+                   const std::string& pesel,
+                   Gender gender,
+                   double salary)
     : Person(firstName, lastName, address, pesel, gender),
       salary_(salary) {}
 
-Employee::~Employee()
-{
-
+Employee::~Employee() {
 }
 
 std::string Employee::getDescription() const {

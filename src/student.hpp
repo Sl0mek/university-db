@@ -6,7 +6,7 @@
 #include "address.hpp"
 #include "person.hpp"
 
-class Student : public Person{
+class Student : public Person {
 private:
     std::string studentCardNumber_;
     std::string getStudentCardNumberFromUser();
@@ -33,4 +33,4 @@ public:
     bool setSalary(double salary) override;
 };
 
-#endif // STUDENT_HPP
+#endif  // STUDENT_HPP
