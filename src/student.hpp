@@ -26,9 +26,11 @@ public:
 
     void setStudentCardNumber(std::string studentCardNumber);
 
-    std::string getStudentDescription() const override;
+    std::string getDescription() const override;
     std::string toString() override;
     void initDataFromUser() override;
+    double getSalary() const override;
+    bool setSalary(double salary) override;
 };
 
 #endif // STUDENT_HPP

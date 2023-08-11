@@ -59,7 +59,7 @@ void Student::setStudentCardNumber(std::string studentCardNumber) {
     studentCardNumber_ = studentCardNumber;
 }
 
-std::string Student::getStudentDescription() const {
+std::string Student::getDescription() const {
     std::stringstream ss;
     ss << "==================================\n";
     ss << "Name: " << firstName_ << " " << lastName_ << "\n";
@@ -95,4 +95,12 @@ std::string Student::toString() {
            this->pesel_ + ";" +
            getGenderString() + ";" +
            this->address_.toString();
+}
+
+double Student::getSalary() const {
+    return 0;
+}
+
+bool Student::setSalary(double salary) {
+    return false;
 }
