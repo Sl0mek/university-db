@@ -50,9 +50,11 @@ public:
     void setPesel(const std::string& pesel);
     void setGender(Gender gender);
 
-    virtual std::string getStudentDescription() const = 0;
+    virtual std::string getDescription() const = 0;
     virtual std::string toString() = 0;
     virtual void initDataFromUser() = 0;
+    virtual double getSalary() const = 0;
+    virtual bool setSalary(double salary) = 0;
 };
 
 #endif // PERSON_HPP

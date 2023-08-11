@@ -70,7 +70,7 @@ std::string Person::getGenderString() const {
     }
 }
 
-std::string Person::getStudentDescription() const {
+std::string Person::getDescription() const {
     std::stringstream ss;
     ss << "==================================\n";
     ss << "Name: " << firstName_ << " " << lastName_ << "\n";
