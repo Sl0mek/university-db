@@ -58,7 +58,7 @@ void Db::displayDatabase() {
     if (this->students_.empty()) {
         std::cout << "\nDB is empty\n";
     } else {
-        std::for_each(this->students_.begin(), this->students_.end(), [](Student& s) { std::cout << s.getStudentDescription(); });
+        std::for_each(this->students_.begin(), this->students_.end(), [](Student& s) { std::cout << s.getDescription(); });
     }
 }
 void Db::addStudent() {
@@ -143,7 +143,7 @@ int Db::searchByLastName(std::string lastName) {
                 return s.getLastName() == lastName;
             });
             if (it != students.end()) {
-                std::cout << it->getStudentDescription();
+                std::cout << it->getDescription();
                 count++;
                 it++;
             }
@@ -175,7 +175,7 @@ int Db::searchByPESEL(std::string pesel) {
                 return s.getPesel() == pesel;
             });
             if (it != students.end()) {
-                std::cout << it->getStudentDescription();
+                std::cout << it->getDescription();
                 count++;
                 it++;
             }
@@ -229,6 +229,16 @@ void Db::sortByPESEL() {
 void Db::sortByLastName() {
     std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
         return a.getLastName() < b.getLastName();
+    });
+    displayDatabase();
+}
+
+void Db::sortBySalary()
+{
+    //TBD!!!
+
+    std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
+        return a.getSalary() < b.getSalary();
     });
     displayDatabase();
 }

@@ -29,6 +29,7 @@ public:
     int searchByPESEL(std::string pesel);
     void sortByPESEL();
     void sortByLastName();
+    void sortBySalary();
     void removeByIndex();
     void removeByIndex(std::string index);
     int getNumberOfStudents();
