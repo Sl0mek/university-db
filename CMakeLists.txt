@@ -20,6 +20,7 @@ set(SRC_LIST
     src/person.cpp
     src/address.cpp
     src/student.cpp
+    src/employee.cpp
     src/db.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC_LIST})
