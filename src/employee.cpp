@@ -29,12 +29,12 @@ Employee::Employee(std::string employee) {
                     properties[9],
                     properties[10],
                     properties[11]);
-    this->firstName_ = properties[0];
-    this->lastName_ = properties[1];
+    this->firstName_ = properties[1];
+    this->lastName_ = properties[2];
     this->address_ = address;
-    this->salary_ = std::stod(properties[2]);
     this->pesel_ = properties[3];
     this->gender_ = gender;
+    this->salary_ = std::stod(properties[12]);
 }
 
 Employee::Employee(const std::string& firstName,
@@ -79,12 +79,13 @@ void Employee::initDataFromUser() {
 }
 
 std::string Employee::toString() {
-    return this->firstName_ + ";" +
+    return "E;" +
+           this->firstName_ + ";" +
            this->lastName_ + ";" +
-           std::to_string(this->salary_) + ";" +
            this->pesel_ + ";" +
            getGenderString() + ";" +
-           this->address_.toString();
+           this->address_.toString() + ";" +
+           std::to_string(this->salary_);
 }
 
 double Employee::getSalary() const {
