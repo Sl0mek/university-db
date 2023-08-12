@@ -33,7 +33,6 @@ void Db::initDb(std::string fileName) {
     }
     std::string line;
     while (std::getline(dbFile, line)) {
-
         std::vector<std::string> properties;
         std::stringstream ss(line);
         std::string property;
@@ -42,13 +41,11 @@ void Db::initDb(std::string fileName) {
             properties.push_back(property);
         }
 
-        if(properties[0] == "S")
-        {
+        if (properties[0] == "S") {
             this->persons_.push_back(createStudent(line));
-        }else if(properties[0] == "E")
-        {
+        } else if (properties[0] == "E") {
             this->persons_.push_back(createEmployee(line));
-        }        
+        }
     }
 
     dbFile.close();
@@ -86,15 +83,13 @@ void Db::addStudent(Student* newStudent) {
     this->persons_.push_back(newStudent);
 }
 
-void Db::addEmployee()
-{
+void Db::addEmployee() {
     auto newEmployee = new Employee();
     newEmployee->initDataFromUser();
     addEmployee(newEmployee);
 }
 
-void Db::addEmployee(Employee* newEmployee)
-{
+void Db::addEmployee(Employee* newEmployee) {
     this->persons_.push_back(newEmployee);
 }
 
@@ -243,11 +238,11 @@ Student* Db::createStudent(std::string student) {
                     properties[11]);
 
     return new Student(properties[1],
-                   properties[2],
-                   address,
-                   properties[2],
-                   gender,
-                   properties[12]);
+                       properties[2],
+                       address,
+                       properties[2],
+                       gender,
+                       properties[12]);
 }
 
 Employee* Db::createEmployee(std::string employee) {
@@ -276,11 +271,11 @@ Employee* Db::createEmployee(std::string employee) {
                     properties[11]);
 
     return new Employee(properties[1],
-                   properties[2],
-                   address,
-                   properties[3],
-                   gender,
-                   std::stod(properties[4]));
+                        properties[2],
+                        address,
+                        properties[3],
+                        gender,
+                        std::stod(properties[4]));
 }
 
 void Db::sortByPESEL() {
