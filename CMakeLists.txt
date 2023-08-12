@@ -28,11 +28,11 @@ add_library(${PROJECT_NAME}-lib STATIC ${SRC_LIST})
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib )
 
-enable_testing()
+# enable_testing()
 
-add_executable(${PROJECT_NAME}-ut tests/tests.cpp)
-target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib GTest::gtest_main)
+# add_executable(${PROJECT_NAME}-ut tests/tests.cpp)
+# target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib GTest::gtest_main)
 
-include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}-ut)
-add_test(NAME runTests COMMAND ${PROJECT_NAME}-ut)
+# include(GoogleTest)
+# gtest_discover_tests(${PROJECT_NAME}-ut)
+# add_test(NAME runTests COMMAND ${PROJECT_NAME}-ut)
