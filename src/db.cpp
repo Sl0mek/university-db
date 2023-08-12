@@ -33,7 +33,22 @@ void Db::initDb(std::string fileName) {
     }
     std::string line;
     while (std::getline(dbFile, line)) {
-        this->students_.push_back(createStudent(line));
+
+        std::vector<std::string> properties;
+        std::stringstream ss(line);
+        std::string property;
+
+        while (std::getline(ss, property, ';')) {
+            properties.push_back(property);
+        }
+
+        if(properties[0] == "S")
+        {
+            this->persons_.push_back(createStudent(line));
+        }else if(properties[0] == "E")
+        {
+            this->persons_.push_back(createEmployee(line));
+        }        
     }
 
     dbFile.close();
@@ -47,32 +62,44 @@ void Db::updateDb(std::string fileName) {
         return;
     }
 
-    std::for_each(this->students_.begin(), this->students_.end(), [&](Student& s) {
-        dbFile << s.toString() << "\n";
+    std::for_each(this->persons_.begin(), this->persons_.end(), [&](Person* p) {
+        dbFile << p->toString() << "\n";
     });
 
     dbFile.close();
 }
 
 void Db::displayDatabase() {
-    if (this->students_.empty()) {
+    if (this->persons_.empty()) {
         std::cout << "\nDB is empty\n";
     } else {
-        std::for_each(this->students_.begin(), this->students_.end(), [](Student& s) { std::cout << s.getDescription(); });
+        std::for_each(this->persons_.begin(), this->persons_.end(), [](Person* p) { std::cout << p->getDescription(); });
     }
 }
 void Db::addStudent() {
-    auto newStudent = Student();
-    newStudent.initDataFromUser();
+    auto newStudent = new Student();
+    newStudent->initDataFromUser();
     addStudent(newStudent);
 }
 
-void Db::addStudent(Student newStudent) {
-    this->students_.push_back(newStudent);
+void Db::addStudent(Student* newStudent) {
+    this->persons_.push_back(newStudent);
 }
 
-std::vector<Student> Db::getStudents() {
-    return students_;
+void Db::addEmployee()
+{
+    auto newEmployee = new Employee();
+    newEmployee->initDataFromUser();
+    addEmployee(newEmployee);
+}
+
+void Db::addEmployee(Employee* newEmployee)
+{
+    this->persons_.push_back(newEmployee);
+}
+
+std::vector<Person*> Db::getPersons() {
+    return persons_;
 }
 
 void Db::displayMenu() {
@@ -80,12 +107,13 @@ void Db::displayMenu() {
     while (true) {
         std::cout << "============== Menu ==============\n";
         std::cout << "1 - Add a student\n";
-        std::cout << "2 - Display the database\n";
-        std::cout << "3 - Search by last name\n";
-        std::cout << "4 - Search by PESEL\n";
-        std::cout << "5 - Sort by PESEL\n";
-        std::cout << "6 - Sort by last name\n";
-        std::cout << "7 - Remove by student ID\n";
+        std::cout << "2 - Add a employee\n";
+        std::cout << "3 - Display the database\n";
+        std::cout << "4 - Search by last name\n";
+        std::cout << "5 - Search by PESEL\n";
+        std::cout << "6 - Sort by PESEL\n";
+        std::cout << "7 - Sort by last name\n";
+        std::cout << "8 - Remove by PESEL\n";
         std::cout << "0 - Exit\n";
         std::cout << "Choose an option: ";
         std::cin >> choice;
@@ -95,22 +123,25 @@ void Db::displayMenu() {
             addStudent();
             break;
         case 2:
-            displayDatabase();
+            addEmployee();
             break;
         case 3:
-            searchByLastName();
+            displayDatabase();
             break;
         case 4:
-            searchByPESEL();
+            searchByLastName();
             break;
         case 5:
-            sortByPESEL();
+            searchByPESEL();
             break;
         case 6:
-            sortByLastName();
+            sortByPESEL();
             break;
         case 7:
-            removeByIndex();
+            sortByLastName();
+            break;
+        case 8:
+            removeByPESEL();
             break;
         case 0:
             updateDb("db.txt");
@@ -136,21 +167,21 @@ void Db::searchByLastName() {
 
 int Db::searchByLastName(std::string lastName) {
     int count = 0;
-    auto search = [](const std::vector<Student>& students, int& count, std::string lastName) {
-        std::vector<Student>::const_iterator it = students.cbegin();
-        while (it != students.end()) {
-            it = std::find_if(it, students.cend(), [&](const Student& s) {
-                return s.getLastName() == lastName;
+    auto search = [](const std::vector<Person*>& persons, int& count, std::string lastName) {
+        std::vector<Person*>::const_iterator it = persons.cbegin();
+        while (it != persons.end()) {
+            it = std::find_if(it, persons.cend(), [&](const Person* p) {
+                return p->getLastName() == lastName;
             });
-            if (it != students.end()) {
-                std::cout << it->getDescription();
+            if (it != persons.end()) {
+                std::cout << (*it)->getDescription();
                 count++;
                 it++;
             }
         }
         std::cout << std::endl;
     };
-    search(students_, count, lastName);
+    search(persons_, count, lastName);
     return count;
 }
 
@@ -168,25 +199,25 @@ void Db::searchByPESEL() {
 
 int Db::searchByPESEL(std::string pesel) {
     int count = 0;
-    auto search = [](const std::vector<Student>& students, int& count, std::string pesel) {
-        std::vector<Student>::const_iterator it = students.cbegin();
-        while (it != students.end()) {
-            it = std::find_if(it, students.cend(), [&](const Student& s) {
-                return s.getPesel() == pesel;
+    auto search = [](const std::vector<Person*>& persons, int& count, std::string pesel) {
+        std::vector<Person*>::const_iterator it = persons.cbegin();
+        while (it != persons.end()) {
+            it = std::find_if(it, persons.cend(), [&](const Person* p) {
+                return p->getPesel() == pesel;
             });
-            if (it != students.end()) {
-                std::cout << it->getDescription();
+            if (it != persons.end()) {
+                std::cout << (*it)->getDescription();
                 count++;
                 it++;
             }
         }
         std::cout << std::endl;
     };
-    search(students_, count, pesel);
+    search(persons_, count, pesel);
     return count;
 }
 
-Student Db::createStudent(std::string student) {
+Student* Db::createStudent(std::string student) {
     std::vector<std::string> properties;
     std::stringstream ss(student);
     std::string property;
@@ -211,51 +242,82 @@ Student Db::createStudent(std::string student) {
                     properties[10],
                     properties[11]);
 
-    return Student(properties[0],
-                   properties[1],
+    return new Student(properties[1],
+                   properties[2],
                    address,
                    properties[2],
+                   gender,
+                   properties[12]);
+}
+
+Employee* Db::createEmployee(std::string employee) {
+    std::vector<std::string> properties;
+    std::stringstream ss(employee);
+    std::string property;
+
+    while (std::getline(ss, property, ';')) {
+        properties.push_back(property);
+    }
+
+    Gender gender = Gender::Unknown;
+
+    if (properties[4] == "Male") {
+        gender = Gender::Male;
+    } else if (properties[4] == "Female") {
+        gender = Gender::Female;
+    }
+
+    Address address(properties[5],
+                    properties[6],
+                    properties[7],
+                    properties[8],
+                    properties[9],
+                    properties[10],
+                    properties[11]);
+
+    return new Employee(properties[1],
+                   properties[2],
+                   address,
                    properties[3],
-                   gender);
+                   gender,
+                   std::stod(properties[4]));
 }
 
 void Db::sortByPESEL() {
-    std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
-        return std::stoll(a.getPesel()) < std::stoll(b.getPesel());
+    std::sort(persons_.begin(), persons_.end(), [](Person* a, Person* b) {
+        return std::stoll(a->getPesel()) < std::stoll(b->getPesel());
     });
     displayDatabase();
 }
 
 void Db::sortByLastName() {
-    std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
-        return a.getLastName() < b.getLastName();
+    std::sort(persons_.begin(), persons_.end(), [](Person* a, Person* b) {
+        return a->getLastName() < b->getLastName();
     });
     displayDatabase();
 }
 
 void Db::sortBySalary() {
-    // TBD!!!
-
-    std::sort(students_.begin(), students_.end(), [](Student a, Student b) {
-        return a.getSalary() < b.getSalary();
+    std::sort(persons_.begin(), persons_.end(), [](Person* a, Person* b) {
+        return a->getSalary() < b->getSalary();
     });
     displayDatabase();
 }
 
-void Db::removeByIndex() {
+void Db::removeByPESEL() {
     std::string tmp = "";
-    std::cout << "Enter index: \n> ";
+    std::cout << "Enter pesel: \n> ";
     std::cin >> tmp;
-    removeByIndex(tmp);
+    removeByPESEL(tmp);
 }
 
-void Db::removeByIndex(std::string index) {
-    auto it = std::remove_if(students_.begin(), students_.end(), [&](const Student& s) {
-        return s.getStudentCardNumber() == index;
+void Db::removeByPESEL(std::string index) {
+    auto it = std::remove_if(persons_.begin(), persons_.end(), [&](const Person* p) {
+        return p->getPesel() == index;
     });
-    students_.erase(it, students_.end());
+    persons_.erase(it, persons_.end());
 }
 
-int Db::getNumberOfStudents() {
-    return students_.size();
-}
+// int Db::getNumberOfPersons() {
+//     return persons_.size();
+// }

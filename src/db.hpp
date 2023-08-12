@@ -5,10 +5,12 @@
 #include <string>
 #include <vector>
 #include "student.hpp"
+#include "employee.hpp"
+#include "person.hpp"
 
 class Db {
 private:
-    std::vector<Student> students_;
+    std::vector<Person*> persons_;
 
 public:
     Db();
@@ -18,11 +20,14 @@ public:
     void initDb(std::string fileName);
     void updateDb(std::string fileName);
     void addStudent();
-    void addStudent(Student newStudent);
-    std::vector<Student> getStudents();
+    void addStudent(Student* newStudent);
+    void addEmployee();
+    void addEmployee(Employee* newEmployee);
+    std::vector<Person*> getPersons();
     void displayDatabase();
 
-    Student createStudent(std::string student);
+    Student* createStudent(std::string student);
+    Employee* createEmployee(std::string employee);
     void searchByLastName();
     int searchByLastName(std::string lastName);
     void searchByPESEL();
@@ -30,9 +35,9 @@ public:
     void sortByPESEL();
     void sortByLastName();
     void sortBySalary();
-    void removeByIndex();
-    void removeByIndex(std::string index);
-    int getNumberOfStudents();
+    void removeByPESEL();
+    void removeByPESEL(std::string pesel);
+    // int getNumberOfPersons();
 };
 
 #endif  // DB_HPP
