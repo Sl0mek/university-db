@@ -29,20 +29,20 @@ Student::Student(std::string student) {
                     properties[9],
                     properties[10],
                     properties[11]);
-    this->firstName_ = properties[0];
-    this->lastName_ = properties[1];
+    this->firstName_ = properties[1];
+    this->lastName_ = properties[2];
     this->address_ = address;
-    this->studentCardNumber_ = properties[2];
     this->pesel_ = properties[3];
     this->gender_ = gender;
+    this->studentCardNumber_ = properties[12];
 }
 
 Student::Student(const std::string& firstName,
                  const std::string& lastName,
                  const Address& address,
-                 std::string studentCardNumber,
                  const std::string& pesel,
-                 Gender gender)
+                 Gender gender,
+                 std::string studentCardNumber)
     : Person(firstName, lastName, address, pesel, gender),
       studentCardNumber_(studentCardNumber) {}
 
@@ -62,9 +62,9 @@ std::string Student::getDescription() const {
     ss << "==================================\n";
     ss << "Name: " << firstName_ << " " << lastName_ << "\n";
     ss << "Address: " << address_.getAddress() << "\n";
-    ss << "Student Card Number: " << studentCardNumber_ << "\n";
     ss << "PESEL: " << pesel_ << "\n";
     ss << "Gender: " << getGenderString() << "\n";
+    ss << "Student Card Number: " << studentCardNumber_ << "\n";
     ss << "==================================\n";
 
     return ss.str();
@@ -80,19 +80,20 @@ std::string Student::getStudentCardNumberFromUser() {
 void Student::initDataFromUser() {
     this->firstName_ = getFirstNameFromUser();
     this->lastName_ = getLastNameFromUser();
-    this->studentCardNumber_ = getStudentCardNumberFromUser();
     this->pesel_ = getPeselFromUser();
     this->gender_ = getGenderFromUser();
     this->address_.initDataFromUser();
+    this->studentCardNumber_ = getStudentCardNumberFromUser();
 }
 
 std::string Student::toString() {
-    return this->firstName_ + ";" +
+    return "S;" +
+           this->firstName_ + ";" +
            this->lastName_ + ";" +
-           this->studentCardNumber_ + ";" +
            this->pesel_ + ";" +
            getGenderString() + ";" +
-           this->address_.toString();
+           this->address_.toString() + ";" +
+           this->studentCardNumber_;
 }
 
 double Student::getSalary() const {

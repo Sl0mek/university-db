@@ -17,9 +17,9 @@ public:
     Student(const std::string& firstName,
             const std::string& lastName,
             const Address& address,
-            std::string studentCardNumber,
             const std::string& pesel,
-            Gender gender);
+            Gender gender,
+            std::string studentCardNumber);
     ~Student() override;
 
     std::string getStudentCardNumber() const;
