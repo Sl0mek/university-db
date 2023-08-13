@@ -11,12 +11,14 @@
 class Db {
 private:
     std::vector<Person*> persons_;
+    void printLogo();
 
 public:
     Db();
     Db(std::string fileName);
     ~Db();
     void displayMenu();
+    void initDb();
     void initDb(std::string fileName);
     void updateDb(std::string fileName);
     void addStudent();
@@ -40,6 +42,7 @@ public:
     void removeByPESEL(std::string pesel);
     void changeSalary();
     void changeSalary(double salary, Person* person);
+    int getNumberOfPersonsInContainer();
 };
 
 #endif  // DB_HPP

@@ -4,6 +4,20 @@
 #include <sstream>
 
 Db::Db() {
+    printLogo();
+    initDb();
+}
+
+Db::Db(std::string fileName) {
+    printLogo();
+    initDb(fileName);
+}
+
+Db::~Db() {
+}
+
+void Db::printLogo()
+{
     std::cout << R"(
               _                    _ _                   _ _     
              (_)                  (_) |                 | | |    
@@ -14,14 +28,20 @@ Db::Db() {
                                           __/ |                  
                                          |___/                   
     )";
-    initDb("db.txt");
 }
 
-Db::Db(std::string fileName) {
-    initDb(fileName);
-}
-
-Db::~Db() {
+void Db::initDb()
+{
+    this->persons_.push_back(createStudent("S;Anna;Nowak;88060918688;Female;Krótka;5;Kraków;30-001;Poland;23;Małopolskie;12345"));
+    this->persons_.push_back(createStudent("S;Maria;Wójcik;72030445982;Female;Średnia;30;Łódź;90-001;Poland;17;Łódzkie;23456"));
+    this->persons_.push_back(createStudent("S;Katarzyna;Lis;54070876522;Female;Krótka;15;Warszawa;44-444;Poland;9;Mazowieckie;34567"));
+    this->persons_.push_back(createStudent("S;Tomasz;Jankowski;67121852871;Male;Słoneczna;3;Kraków;30-001;Poland;21;Małopolskie;45678"));
+    this->persons_.push_back(createStudent("S;Ewa;Piotrowska;60021841424;Female;Cicha;8;Gdynia;81-001;Poland;14;Pomorskie;56789"));
+    this->persons_.push_back(createEmployee("E;Jan;Kowalski;54090954332;Male;Szeroka;88;Warszawa;44-444;Poland;77;Mazowieckie;1000000.000000"));
+    this->persons_.push_back(createEmployee("E;Piotr;Czerwony;02300521418;Male;Długa;123;Gdańsk;80-001;Poland;5;Pomorskie;75000.000000"));
+    this->persons_.push_back(createEmployee("E;Andrzej;Kaczmarek;05272371337;Male;Prosta;7;Poznań;60-001;Poland;2;Wielkopolskie;62000.000000"));
+    this->persons_.push_back(createEmployee("E;Magdalena;Wojciechowska;50100835565;Female;Nowa;50;Wrocław;50-001;Poland;8;Dolnośląskie;85000.000000"));
+    this->persons_.push_back(createEmployee("E;Kamil;Zawadzki;64022915256;Male;Wiejska;12;Lublin;20-001;Poland;4;Lubelskie;67000.000000"));
 }
 
 void Db::initDb(std::string fileName) {
@@ -327,10 +347,16 @@ void Db::removeByPESEL() {
 }
 
 void Db::removeByPESEL(std::string index) {
-    auto it = std::remove_if(persons_.begin(), persons_.end(), [&](const Person* p) {
-        return p->getPesel() == index;
+    auto newEnd = std::remove_if(persons_.begin(), persons_.end(), [&](const Person* p) {
+        bool shouldRemove = p->getPesel() == index;
+        return shouldRemove;
     });
-    persons_.erase(it, persons_.end());
+
+    for (auto it = newEnd; it != persons_.end(); it++) {
+        delete *it;
+    }
+
+    persons_.erase(newEnd, persons_.end());
 }
 
 void Db::changeSalary() {
@@ -376,4 +402,9 @@ void Db::changeSalary(double salary, Person* person) {
             }
         }
     }
+}
+
+int Db::getNumberOfPersonsInContainer()
+{
+    return persons_.size();
 }
