@@ -59,7 +59,7 @@ void Student::setStudentCardNumber(std::string studentCardNumber) {
 
 std::string Student::getDescription() const {
     std::stringstream ss;
-    ss << "==================================\n";
+    ss << "============= Student ============\n";
     ss << "Name: " << firstName_ << " " << lastName_ << "\n";
     ss << "Address: " << address_.getAddress() << "\n";
     ss << "PESEL: " << pesel_ << "\n";
@@ -101,5 +101,6 @@ double Student::getSalary() const {
 }
 
 bool Student::setSalary(double salary) {
+    std::cout << "You cannot change the student's earnings!\n";
     return false;
 }
