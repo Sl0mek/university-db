@@ -109,8 +109,10 @@ void Db::displayMenu() {
         std::cout << "6 - Sort by PESEL\n";
         std::cout << "7 - Sort by last name\n";
         std::cout << "8 - Remove by PESEL\n";
+        std::cout << "9 - Sort by salary\n";
+        std::cout << "10 - Change employee salary\n";
         std::cout << "0 - Exit\n";
-        std::cout << "Choose an option: ";
+        std::cout << "Choose an option: \n>";
         std::cin >> choice;
 
         switch (choice) {
@@ -137,6 +139,12 @@ void Db::displayMenu() {
             break;
         case 8:
             removeByPESEL();
+            break;
+        case 9:
+            sortBySalary();
+            break;
+        case 10:
+            changeSalary();
             break;
         case 0:
             updateDb("db.txt");
@@ -212,6 +220,19 @@ int Db::searchByPESEL(std::string pesel) {
     return count;
 }
 
+std::vector<Person*>::const_iterator Db::searchPersonByPESEL(std::string pesel)
+{
+    auto search = [](const std::vector<Person*>& persons, std::string pesel) {
+        std::vector<Person*>::const_iterator it = persons.cbegin();
+
+        it = std::find_if(it, persons.cend(), [&](const Person* p) {
+            return p->getPesel() == pesel;
+        });
+        return it;
+    };
+    return search(persons_, pesel);
+}
+
 Student* Db::createStudent(std::string student) {
     std::vector<std::string> properties;
     std::stringstream ss(student);
@@ -240,7 +261,7 @@ Student* Db::createStudent(std::string student) {
     return new Student(properties[1],
                        properties[2],
                        address,
-                       properties[2],
+                       properties[3],
                        gender,
                        properties[12]);
 }
@@ -275,7 +296,7 @@ Employee* Db::createEmployee(std::string employee) {
                         address,
                         properties[3],
                         gender,
-                        std::stod(properties[4]));
+                        std::stod(properties[12]));
 }
 
 void Db::sortByPESEL() {
@@ -294,7 +315,7 @@ void Db::sortByLastName() {
 
 void Db::sortBySalary() {
     std::sort(persons_.begin(), persons_.end(), [](Person* a, Person* b) {
-        return a->getSalary() < b->getSalary();
+        return a->getSalary() > b->getSalary();
     });
     displayDatabase();
 }
@@ -313,6 +334,60 @@ void Db::removeByPESEL(std::string index) {
     persons_.erase(it, persons_.end());
 }
 
-// int Db::getNumberOfPersons() {
-//     return persons_.size();
-// }
+void Db::changeSalary()
+{
+    auto pesel = Person::getPeselFromUser();
+    double salary = 0;
+    std::cout << "Enter salary: \n> ";
+    bool isValid = false;
+    while(!isValid)
+    {
+        if (std::cin >> salary) {
+            isValid = true;
+        } else {
+            std::cout << "The entered data is not correct! Please enter again.\n";
+            std::cout << "Enter salary: \n> ";
+            if (std::cin >> salary) {
+                isValid = true;
+            }
+        }
+    }
+    auto person = searchPersonByPESEL(pesel);
+    if(person == persons_.end())
+    {
+        std::cout << "The person is missing from the DB!\n";
+    }
+    else
+    {
+        changeSalary(salary, *person);
+    }
+}
+
+void Db::changeSalary(double salary, Person* person)
+{
+    auto isSet = person->setSalary(salary);
+    if(!isSet)
+    {
+        std::cout << "Search again? (y/n)\n>";
+        std::string tmp = "";
+        std::cin >> tmp;
+        auto isValid = false;
+        while(!isValid)
+        {
+            if(tmp == "Y" || tmp == "y")
+            {
+                isValid = true;
+                changeSalary();
+            }
+            else if(tmp == "N" || tmp == "n")
+            {
+                isValid = true;
+            }
+            else 
+            {
+                std::cout << "Please enter correct data: 'y' or 'n'\n>";
+                std::cin >> tmp;
+            }
+        }
+    }
+}

@@ -32,12 +32,14 @@ public:
     int searchByLastName(std::string lastName);
     void searchByPESEL();
     int searchByPESEL(std::string pesel);
+    std::vector<Person*>::const_iterator searchPersonByPESEL(std::string pesel);
     void sortByPESEL();
     void sortByLastName();
     void sortBySalary();
     void removeByPESEL();
     void removeByPESEL(std::string pesel);
-    // int getNumberOfPersons();
+    void changeSalary();
+    void changeSalary(double salary, Person* person);
 };
 
 #endif  // DB_HPP
