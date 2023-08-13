@@ -70,7 +70,7 @@ std::string Address::toString() {
            this->zipCode_ + ";" +
            this->country_ + ";" +
            this->apartmentNumber_ + ";" +
-           this->state_ + ";";
+           this->state_;
 }
 
 std::string Address::getStreetFromUser() {
