@@ -13,7 +13,7 @@ private:
 
 public:
     Employee();
-    Employee(std::string student);
+    Employee(std::string employee);
     Employee(const std::string& firstName,
              const std::string& lastName,
              const Address& address,
