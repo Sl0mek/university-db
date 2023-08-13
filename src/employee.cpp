@@ -51,7 +51,7 @@ Employee::~Employee() {
 
 std::string Employee::getDescription() const {
     std::stringstream ss;
-    ss << "==================================\n";
+    ss << "============= Employee ===========\n";
     ss << "Name: " << firstName_ << " " << lastName_ << "\n";
     ss << "Address: " << address_.getAddress() << "\n";
     ss << "PESEL: " << pesel_ << "\n";
