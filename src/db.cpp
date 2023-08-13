@@ -16,8 +16,7 @@ Db::Db(std::string fileName) {
 Db::~Db() {
 }
 
-void Db::printLogo()
-{
+void Db::printLogo() {
     std::cout << R"(
               _                    _ _                   _ _     
              (_)                  (_) |                 | | |    
@@ -30,8 +29,7 @@ void Db::printLogo()
     )";
 }
 
-void Db::initDb()
-{
+void Db::initDb() {
     this->persons_.push_back(createStudent("S;Anna;Nowak;88060918688;Female;Krótka;5;Kraków;30-001;Poland;23;Małopolskie;12345"));
     this->persons_.push_back(createStudent("S;Maria;Wójcik;72030445982;Female;Średnia;30;Łódź;90-001;Poland;17;Łódzkie;23456"));
     this->persons_.push_back(createStudent("S;Katarzyna;Lis;54070876522;Female;Krótka;15;Warszawa;44-444;Poland;9;Mazowieckie;34567"));
@@ -404,7 +402,6 @@ void Db::changeSalary(double salary, Person* person) {
     }
 }
 
-int Db::getNumberOfPersonsInContainer()
-{
+int Db::getNumberOfPersonsInContainer() {
     return persons_.size();
 }

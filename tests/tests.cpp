@@ -33,7 +33,7 @@ TEST(DbTest, SearchByLastNameTest) {
 
 TEST(DbTest, SearchByPESELTest) {
     Db db("db-ut.txt");
-    
+
     Student student("S;Anna;Nowak;91041572189;Female;Krótka;5;Kraków;30-001;Poland;23;Małopolskie;12345");
     Employee employee("E;Jan;Kowalski;59062989657;Male;Szeroka;88;Warszawa;44-444;Poland;77;Mazowieckie;1000000.000000");
 
@@ -47,7 +47,7 @@ TEST(DbTest, SearchByPESELTest) {
 
 TEST(DbTest, SortByPESELTest) {
     Db db("db-ut.txt");
-    
+
     Student student1("S;Anna;Nowak;91041572189;Female;Krótka;5;Kraków;30-001;Poland;23;Małopolskie;12345");
     Employee employee1("E;Jan;Kowalski;59062989657;Male;Szeroka;88;Warszawa;44-444;Poland;77;Mazowieckie;1000000.000000");
     Student student2("S;Katarzyna;Lis;88081564123;Female;Krótka;15;Warszawa;44-444;Poland;9;Mazowieckie;34567");
@@ -107,7 +107,7 @@ TEST(DbTest, SortBySalaryTest) {
 
 TEST(DbTest, RemoveByPeselTest) {
     Db db("db-ut.txt");
-    
+
     auto student1 = new Student("S;Anna;Nowak;91041572189;Female;Krótka;5;Kraków;30-0d01;Polan;23;Małopolskie;12345");
     auto employee1 = new Employee("E;Jan;Kowalski;59062989657;Male;Szeroka;88;Warszawa;44-444;Poland;77;Mazowieckie;1000000.000000");
     auto student2 = new Student("S;Katarzyna;Lis;88081564123;Female;Krótka;15;Warszawa;44-444;Poland;9;Mazowieckie;34567");
@@ -129,7 +129,7 @@ TEST(DbTest, RemoveByPeselTest) {
 
 TEST(DbTest, ChangeSalaryTest) {
     Db db("db-ut.txt");
-    
+
     Employee employee("E;Jan;Kowalski;59062989657;Male;Szeroka;88;Warszawa;44-444;Poland;77;Mazowieckie;1000000.000000");
 
     db.addEmployee(&employee);
@@ -143,21 +143,21 @@ TEST(DbTest, ChangeSalaryTest) {
 
 TEST(DbTest, GeneratingPseudoPersonTest) {
     Db db;
-    
+
     EXPECT_EQ(db.getNumberOfPersonsInContainer(), 10);
 }
 
 TEST(DbTest, CreateStudentTest) {
     Db db("db-ut.txt");
-    
+
     auto student = db.createStudent("S;Anna;Nowak;91041572189;Female;Krótka;5;Kraków;30-333;Poland;23;Małopolskie;12345");
 
-    EXPECT_EQ(student->getFirstName() , "Anna");
-    EXPECT_EQ(student->getLastName() , "Nowak");
-    EXPECT_EQ(student->getPesel() , "91041572189");
-    EXPECT_EQ(student->getGender() , Gender::Female);
-    EXPECT_EQ(student->getStudentCardNumber() , "12345");
-    EXPECT_EQ(student->getAddress().getStreet() , "Krótka");
+    EXPECT_EQ(student->getFirstName(), "Anna");
+    EXPECT_EQ(student->getLastName(), "Nowak");
+    EXPECT_EQ(student->getPesel(), "91041572189");
+    EXPECT_EQ(student->getGender(), Gender::Female);
+    EXPECT_EQ(student->getStudentCardNumber(), "12345");
+    EXPECT_EQ(student->getAddress().getStreet(), "Krótka");
     EXPECT_EQ(student->getAddress().getHouseNumber(), "5");
     EXPECT_EQ(student->getAddress().getApartmentNumber(), "23");
     EXPECT_EQ(student->getAddress().getCity(), "Kraków");
@@ -168,15 +168,15 @@ TEST(DbTest, CreateStudentTest) {
 
 TEST(DbTest, CreateEmployeeTest) {
     Db db("db-ut.txt");
-    
+
     auto employee = db.createEmployee("E;Anna;Nowak;91041572189;Female;Krótka;5;Kraków;30-333;Poland;23;Małopolskie;1000000.000000");
 
-    EXPECT_EQ(employee->getFirstName() , "Anna");
-    EXPECT_EQ(employee->getLastName() , "Nowak");
-    EXPECT_EQ(employee->getPesel() , "91041572189");
-    EXPECT_EQ(employee->getGender() , Gender::Female);
-    EXPECT_EQ(employee->getSalary() , 1000000);
-    EXPECT_EQ(employee->getAddress().getStreet() , "Krótka");
+    EXPECT_EQ(employee->getFirstName(), "Anna");
+    EXPECT_EQ(employee->getLastName(), "Nowak");
+    EXPECT_EQ(employee->getPesel(), "91041572189");
+    EXPECT_EQ(employee->getGender(), Gender::Female);
+    EXPECT_EQ(employee->getSalary(), 1000000);
+    EXPECT_EQ(employee->getAddress().getStreet(), "Krótka");
     EXPECT_EQ(employee->getAddress().getHouseNumber(), "5");
     EXPECT_EQ(employee->getAddress().getApartmentNumber(), "23");
     EXPECT_EQ(employee->getAddress().getCity(), "Kraków");
@@ -187,7 +187,7 @@ TEST(DbTest, CreateEmployeeTest) {
 
 TEST(DbTest, GetNumberOfPersonsInContainerTest) {
     Db db("db-ut.txt");
-    
+
     auto student1 = new Student("S;Anna;Nowak;91041572189;Female;Krótka;5;Kraków;30-0d01;Polan;23;Małopolskie;12345");
     auto employee1 = new Employee("E;Jan;Kowalski;59062989657;Male;Szeroka;88;Warszawa;44-444;Poland;77;Mazowieckie;1000000.000000");
     auto student2 = new Student("S;Katarzyna;Lis;88081564123;Female;Krótka;15;Warszawa;44-444;Poland;9;Mazowieckie;34567");
@@ -262,7 +262,8 @@ TEST(StudentTest, GetGenderStringTest) {
     EXPECT_EQ(unknownStudent.getGenderString(), "Unknown");
 }
 
-TEST(StudentTest, PeselValidationTest) {;
+TEST(StudentTest, PeselValidationTest) {
+    ;
     EXPECT_TRUE(Student::isPeselValid("90031582998"));
     EXPECT_TRUE(Student::isPeselValid("64061335972"));
     EXPECT_TRUE(Student::isPeselValid("05251898914"));
