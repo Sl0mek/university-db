@@ -220,8 +220,7 @@ int Db::searchByPESEL(std::string pesel) {
     return count;
 }
 
-std::vector<Person*>::const_iterator Db::searchPersonByPESEL(std::string pesel)
-{
+std::vector<Person*>::const_iterator Db::searchPersonByPESEL(std::string pesel) {
     auto search = [](const std::vector<Person*>& persons, std::string pesel) {
         std::vector<Person*>::const_iterator it = persons.cbegin();
 
@@ -334,14 +333,12 @@ void Db::removeByPESEL(std::string index) {
     persons_.erase(it, persons_.end());
 }
 
-void Db::changeSalary()
-{
+void Db::changeSalary() {
     auto pesel = Person::getPeselFromUser();
     double salary = 0;
     std::cout << "Enter salary: \n> ";
     bool isValid = false;
-    while(!isValid)
-    {
+    while (!isValid) {
         if (std::cin >> salary) {
             isValid = true;
         } else {
@@ -353,38 +350,27 @@ void Db::changeSalary()
         }
     }
     auto person = searchPersonByPESEL(pesel);
-    if(person == persons_.end())
-    {
+    if (person == persons_.end()) {
         std::cout << "The person is missing from the DB!\n";
-    }
-    else
-    {
+    } else {
         changeSalary(salary, *person);
     }
 }
 
-void Db::changeSalary(double salary, Person* person)
-{
+void Db::changeSalary(double salary, Person* person) {
     auto isSet = person->setSalary(salary);
-    if(!isSet)
-    {
+    if (!isSet) {
         std::cout << "Search again? (y/n)\n>";
         std::string tmp = "";
         std::cin >> tmp;
         auto isValid = false;
-        while(!isValid)
-        {
-            if(tmp == "Y" || tmp == "y")
-            {
+        while (!isValid) {
+            if (tmp == "Y" || tmp == "y") {
                 isValid = true;
                 changeSalary();
-            }
-            else if(tmp == "N" || tmp == "n")
-            {
+            } else if (tmp == "N" || tmp == "n") {
                 isValid = true;
-            }
-            else 
-            {
+            } else {
                 std::cout << "Please enter correct data: 'y' or 'n'\n>";
                 std::cin >> tmp;
             }
