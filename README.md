@@ -96,7 +96,7 @@ removeByPESEL("88060918688");
 sortBySalary();
 
 // Change in salary
-changeSalary(100000, person);();
+changeSalary(100000, person);
 ```
 
 ## Authors
