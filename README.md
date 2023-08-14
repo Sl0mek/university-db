@@ -1,16 +1,16 @@
 ```
-              _                    _ _                   _ _     
-             (_)                  (_) |                 | | |    
-  _   _ _ __  ___   _____ _ __ ___ _| |_ _   _ ______ __| | |__  
- | | | | '_ \| \ \ / / _ \ '__/ __| | __| | | |______/ _` | '_ \ 
- | |_| | | | | |\ V /  __/ |  \__ \ | |_| |_| |     | (_| | |_) |
-  \__,_|_| |_|_| \_/ \___|_|  |___/_|\__|\__, |      \__,_|_.__/ 
-                                          __/ |                  
-                                         |___/                   
+             _                    _ _                   _ _                
+            (_)                  (_) |                 | | |     _     _   
+ _   _ _ __  ___   _____ _ __ ___ _| |_ _   _ ______ __| | |__ _| |_ _| |_ 
+| | | | '_ \| \ \ / / _ \ '__/ __| | __| | | |______/ _` | '_ \_   _|_   _|
+| |_| | | | | |\ V /  __/ |  \__ \ | |_| |_| |     | (_| | |_) ||_|   |_|  
+ \__,_|_| |_|_| \_/ \___|_|  |___/_|\__|\__, |      \__,_|_.__/            
+                                         __/ |                             
+                                        |___/                                      
 ```
 ## Description
 
-University-DB is a program written in C++ that serves as an academic student database. The program allows for storing, adding, displaying, searching, sorting, and deleting student records.
+University-DB++, coded in C++, offers a comprehensive academic database solution. It handles student, faculty, and staff records, enabling storing, adding, displaying, searching, sorting, deleting, editing, and managing data with ease.
 
 ## Requirements
 
@@ -23,9 +23,17 @@ The program meets the following requirements:
 - Search by PESEL number
 - Sorting by PESEL number
 - Sort by last name
-- Delete by index number
+- Delete by PESEL
 - Validation if the PESEL number is correct, according to [Wikipedia](https://pl.wikipedia.org/wiki/PESEL#Cyfra_control) - correctness of PESEL
 - Loading from a file and saving the entire database to a file
+
+New requirements:
+
+- Storing records of university employees for work: name, surname, PESEL number, gender, address, earnings
+- All persons, whether they are employees or students, are to be kept in one container
+- Filling the database with artificial data
+- Modification of earnings by searching for a person by PESEL number
+- Sort by salary
 
 ## Instructions
 
@@ -40,7 +48,7 @@ To compile and run a program using CMake, follow these steps:
 mkdir build
 cd build
 cmake ..
-make
+make -j
 ```
 
 After successfully compiling, run the program.
@@ -53,6 +61,12 @@ Launching the tests
 
 ```bash
 ./university-db-ut
+```
+
+Run with generated data - cleans and injects dummy data into the db
+
+```bash
+./university-db [--generate | -g]
 ```
 ## Przykłady użycia
 
@@ -75,8 +89,14 @@ sortByPESEL();
 // Sort by last name
 sortByLastName();
 
-// Delete by index number
-removeByIndex("12345");
+// Delete by PESEL
+removeByPESEL("88060918688");
+
+// Sort by salary
+sortBySalary();
+
+// Change in salary
+changeSalary(100000, person);();
 ```
 
 ## Authors
