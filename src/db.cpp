@@ -89,12 +89,15 @@ void Db::displayDatabase() {
         std::cout << "\nDB is empty\n";
     } else {
         std::for_each(this->persons_.begin(), this->persons_.end(), [](Person* p) { std::cout << p->getDescription(); });
+        std::cout << "\nNumber of people: " << this->getNumberOfPersonsInContainer() << "\n";
     }
 }
 void Db::addStudent() {
     auto newStudent = new Student();
     newStudent->initDataFromUser();
     addStudent(newStudent);
+    std::cout << "\nAdded\n";
+    std::cout << newStudent->getDescription();
 }
 
 void Db::addStudent(Student* newStudent) {
@@ -105,6 +108,8 @@ void Db::addEmployee() {
     auto newEmployee = new Employee();
     newEmployee->initDataFromUser();
     addEmployee(newEmployee);
+    std::cout << "\nAdded\n";
+    std::cout << newEmployee->getDescription();
 }
 
 void Db::addEmployee(Employee* newEmployee) {
@@ -341,7 +346,15 @@ void Db::removeByPESEL() {
     std::string tmp = "";
     std::cout << "Enter pesel: \n> ";
     std::cin >> tmp;
-    removeByPESEL(tmp);
+    auto it = this->searchPersonByPESEL(tmp);
+
+    if (it == this->persons_.end()) {
+        std::cout << "\nThe person with the PESEL number " << tmp << " does not exist in the database. There's nothing to remove.\n";
+    } else {
+        std::cout << "\nRemoved:\n";
+        std::cout << (*it)->getDescription();
+        removeByPESEL(tmp);
+    }
 }
 
 void Db::removeByPESEL(std::string index) {
