@@ -68,7 +68,7 @@ Run with generated data - cleans and injects dummy data into the db
 ```bash
 ./university-db [--generate | -g]
 ```
-## Przykłady użycia
+## Usage examples
 
 ```cpp
 // Add a new student
