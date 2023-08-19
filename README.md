@@ -54,7 +54,7 @@ Launching the tests
 ```bash
 ./university-db-ut
 ```
-## Przykłady użycia
+## Usage examples
 
 ```cpp
 // Add a new student
