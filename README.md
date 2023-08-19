@@ -10,11 +10,13 @@
 ```
 ## Description
 
-University-DB is a program written in C++ that serves as an academic student database. The program allows for storing, adding, displaying, searching, sorting, and deleting student records.
+University-DB and University-DB++, coded in C++, offers a comprehensive academic database solution. It handles student, faculty, and staff records, enabling storing, adding, displaying, searching, sorting, deleting, editing, and managing data with ease.
 
 ## Requirements
 
 The program meets the following requirements:
+
+0x0C
 
 - Storing student records with the following structure: Name, surname, address, index number, PESEL number, gender
 - Adding new students
@@ -26,6 +28,14 @@ The program meets the following requirements:
 - Delete by index number
 - Validation if the PESEL number is correct, according to [Wikipedia](https://pl.wikipedia.org/wiki/PESEL#Cyfra_control) - correctness of PESEL
 - Loading from a file and saving the entire database to a file
+
+0x1A
+
+- Storing records of university employees for work: name, surname, PESEL number, gender, address, earnings
+- All persons, whether they are employees or students, are to be kept in one container
+- Filling the database with artificial data
+- Modification of earnings by searching for a person by PESEL number
+- Sort by salary
 
 ## Instructions
 
@@ -54,29 +64,11 @@ Launching the tests
 ```bash
 ./university-db-ut
 ```
-## Przykłady użycia
 
-```cpp
-// Add a new student
-addStudent(newStudent);
+0x1A
 
-// Display entire database
-displayDatabase();
-
-// Search by last name
-searchByLastName("Kowalski");
-
-// Search by PESEL number
-searchByPESEL("88010101234");
-
-// Sorting by PESEL number
-sortByPESEL();
-
-// Sort by last name
-sortByLastName();
-
-// Delete by index number
-removeByIndex("12345");
+```bash
+./university-db [--generate | -g]
 ```
 
 ## Authors
